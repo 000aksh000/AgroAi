@@ -107,15 +107,15 @@ export const WeatherPage = () => {
       {
     /* Header & Search */
   }
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-black text-soil-900 tracking-tight">
               Agronomic Weather & Forecast
             </h1>
-            <Badge variant="info" size="sm">Open-Meteo Live</Badge>
+            <Badge variant="leaf" size="sm">Open-Meteo Live</Badge>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-soil-500 mt-1 font-medium">
             Real-time meteorological monitoring and agricultural field-spraying windows for Indian farmers.
           </p>
         </div>
@@ -126,13 +126,13 @@ export const WeatherPage = () => {
         <div className="flex items-center gap-2 w-full md:w-auto">
           <form onSubmit={handleSearch} className="flex items-center gap-2 flex-1 md:w-72">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-soil-400 absolute left-3 top-2.5" />
               <input
     type="text"
     placeholder="Search city, district, or state (e.g. UP, Delhi)"
     value={cityInput}
     onChange={(e) => setCityInput(e.target.value)}
-    className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
+    className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-900"
   />
             </div>
             <Button type="submit" size="sm">
@@ -147,10 +147,10 @@ export const WeatherPage = () => {
     onClick={handleUseGps}
     isLoading={isLocating}
     title="Use current GPS location"
-    className="flex items-center gap-1.5 whitespace-nowrap bg-emerald-50 text-emerald-800 border-emerald-300 hover:bg-emerald-100"
+    className="flex items-center gap-1.5 whitespace-nowrap bg-sand-100 text-soil-800 border-sand-300 hover:bg-sand-200"
   >
-            <MapPin className="w-3.5 h-3.5 text-emerald-600" />
-            <span className="hidden sm:inline">Locate Me</span>
+            <MapPin className="w-3.5 h-3.5 text-leaf-600" />
+            <span className="hidden sm:inline font-bold">Locate Me</span>
           </Button>
         </div>
       </div>
@@ -189,7 +189,7 @@ export const WeatherPage = () => {
             {
     /* Current Weather (5 cols) */
   }
-            <Card className="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white border-slate-800">
+            <Card className="lg:col-span-5 bg-gradient-to-br from-[#183626] via-[#244b34] to-[#3a3022] text-white border-leaf-700/40 shadow-warm-lg">
               <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                 <div>
                   <h3 className="font-bold text-base text-white">{weather.location.city}</h3>

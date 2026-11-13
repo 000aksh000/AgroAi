@@ -166,10 +166,10 @@ export const FarmsPage = () => {
       {
     /* Page Header */
   }
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Farm Management</h1>
-          <p className="text-xs text-slate-500 mt-1">
+          <h1 className="text-2xl font-black text-soil-900 tracking-tight">Farm Plot Management</h1>
+          <p className="text-xs text-soil-500 mt-1 font-medium">
             Create, view, and organize your agricultural plots, soil measurements, and irrigation sources.
           </p>
         </div>

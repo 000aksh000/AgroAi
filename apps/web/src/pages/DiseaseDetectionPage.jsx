@@ -7,12 +7,16 @@ import {
   AlertTriangle,
   ShieldAlert,
   Info,
-  RefreshCw
+  RefreshCw,
+  Leaf,
+  Sprout,
+  Check
 } from "lucide-react";
 import { apiClient } from "../api/client";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
 import { Badge } from "../components/ui/Badge";
+
 export const DiseaseDetectionPage = () => {
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -21,6 +25,7 @@ export const DiseaseDetectionPage = () => {
   const [diagnosisResult, setDiagnosisResult] = useState(null);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
+
   const handleFileChange = (selectedFile) => {
     setError(null);
     if (!selectedFile.type.startsWith("image/")) {
@@ -35,6 +40,7 @@ export const DiseaseDetectionPage = () => {
     setPreviewUrl(URL.createObjectURL(selectedFile));
     setDiagnosisResult(null);
   };
+
   const uploadMutation = useMutation({
     mutationFn: async () => {
       if (!file) throw new Error("No file selected");
@@ -53,341 +59,365 @@ export const DiseaseDetectionPage = () => {
     },
     onError: (err) => {
       setError(
-        err.response?.data?.error?.message || "Failed to classify leaf image. Ensure ML service is running and image is clear."
+        err.response?.data?.error?.message ||
+          "Failed to classify leaf image. Ensure ML service is running and image is clear."
       );
     }
   });
-  return <div className="space-y-6">
-      {
-    /* Header */
-  }
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-black text-soil-900 tracking-tight">
               Plant Disease Diagnostic Scanner
             </h1>
-            <Badge variant="warning" size="sm">Computer Vision</Badge>
+            <Badge variant="leaf" size="sm">
+              <Leaf className="w-3 h-3 text-leaf-600 mr-0.5 inline" />
+              Gemini Vision AI
+            </Badge>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            Upload leaf photos to detect fungal, bacterial, and pest blights with integrated IPM treatment advice.
+          <p className="text-xs text-soil-500 mt-1 font-medium">
+            Upload leaf photos to diagnose fungal, bacterial, and pest blights with integrated IPM treatment advice.
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {
-    /* Upload Column (5 cols on lg) */
-  }
+        {/* Upload Column (5 cols on lg) */}
         <div className="lg:col-span-5 space-y-4">
           <Card>
-            <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-bold text-soil-800 uppercase tracking-wider mb-4 flex items-center gap-1.5">
+              <Sprout className="w-3.5 h-3.5 text-leaf-600" />
               Upload Foliage Photo
             </h3>
 
-            {error && <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+            {error && (
+              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
-              </div>}
+              </div>
+            )}
 
-            {
-    /* Drag & Drop Area */
-  }
+            {/* Drag & Drop Area */}
             <div
-    onClick={() => fileInputRef.current?.click()}
-    onDragOver={(e) => e.preventDefault()}
-    onDrop={(e) => {
-      e.preventDefault();
-      if (e.dataTransfer.files?.[0]) {
-        handleFileChange(e.dataTransfer.files[0]);
-      }
-    }}
-    className="border-2 border-dashed border-slate-300 hover:border-agri-500 rounded-2xl p-6 text-center cursor-pointer transition-colors bg-earth-50/60 hover:bg-earth-100/60"
-  >
+              onClick={() => fileInputRef.current?.click()}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={(e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files?.[0]) {
+                  handleFileChange(e.dataTransfer.files[0]);
+                }
+              }}
+              className="border-2 border-dashed border-sand-300 hover:border-leaf-500 rounded-3xl p-6 text-center cursor-pointer transition-all duration-200 bg-sand-50/70 hover:bg-sand-100/70"
+            >
               <input
-    ref={fileInputRef}
-    type="file"
-    accept="image/jpeg,image/png,image/webp"
-    className="hidden"
-    onChange={(e) => {
-      if (e.target.files?.[0]) {
-        handleFileChange(e.target.files[0]);
-      }
-    }}
-  />
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className="hidden"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    handleFileChange(e.target.files[0]);
+                  }
+                }}
+              />
 
-              {previewUrl ? <div className="space-y-3">
+              {previewUrl ? (
+                <div className="space-y-3">
                   <img
-    src={previewUrl}
-    alt="Leaf upload preview"
-    className="max-h-56 mx-auto rounded-xl object-contain shadow-sm border border-slate-200"
-  />
-                  <p className="text-xs text-agri-700 font-semibold flex items-center justify-center gap-1">
+                    src={previewUrl}
+                    alt="Leaf upload preview"
+                    className="max-h-56 mx-auto rounded-2xl object-contain shadow-warm border border-sand-200"
+                  />
+                  <p className="text-xs text-leaf-700 font-bold flex items-center justify-center gap-1">
                     <RefreshCw className="w-3.5 h-3.5" /> Click or drag to change image
                   </p>
-                </div> : <div className="py-6">
-                  <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mx-auto text-slate-400 mb-3 shadow-sm">
-                    <UploadCloud className="w-7 h-7 text-agri-600" />
+                </div>
+              ) : (
+                <div className="py-6">
+                  <div className="w-14 h-14 rounded-2xl bg-[#fffdfa] border border-sand-300/80 flex items-center justify-center mx-auto text-soil-400 mb-3 shadow-warm">
+                    <UploadCloud className="w-7 h-7 text-leaf-600" />
                   </div>
-                  <p className="text-sm font-semibold text-slate-800">
+                  <p className="text-sm font-bold text-soil-800">
                     Click to browse or drag & drop leaf image
                   </p>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs text-soil-400 mt-1 font-medium">
                     Supports JPEG, PNG, WEBP (Max 10MB)
                   </p>
-                </div>}
+                </div>
+              )}
             </div>
 
             <div className="mt-4 space-y-3 text-xs">
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-bold text-soil-700 mb-1">
                   Crop Type (Optional Hint)
                 </label>
                 <select
-    value={cropName}
-    onChange={(e) => setCropName(e.target.value)}
-    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
+                  value={cropName}
+                  onChange={(e) => setCropName(e.target.value)}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-800 font-medium cursor-pointer"
+                >
                   <option value="Tomato">Tomato (Tamatar)</option>
                   <option value="Potato">Potato (Aloo)</option>
                   <option value="Rice">Rice / Paddy (Dhan)</option>
+                  <option value="Wheat">Wheat (Gehu)</option>
                   <option value="Cotton">Cotton (Kapas)</option>
                   <option value="Corn">Corn / Maize (Makka)</option>
+                  <option value="Mustard">Mustard (Sarson)</option>
                   <option value="Other">Other / Unknown</option>
                 </select>
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-700 mb-1">
+                <label className="block font-bold text-soil-700 mb-1">
                   Field Observations / Notes
                 </label>
                 <textarea
-    rows={2}
-    placeholder="e.g. Spotted yellowing after 3 days of rain..."
-    value={userNotes}
-    onChange={(e) => setUserNotes(e.target.value)}
-    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                  rows={2}
+                  placeholder="e.g. Spotted yellowing with brown margins after rainfall..."
+                  value={userNotes}
+                  onChange={(e) => setUserNotes(e.target.value)}
+                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-800 placeholder:text-soil-300"
+                />
               </div>
 
-              {
-    /* Sample Leaf Selector for quick testing */
-  }
+              {/* Sample Leaf Selector for quick testing */}
               <div className="pt-1">
-                <span className="text-[11px] font-semibold text-slate-500 block mb-1.5">
-                  Or Test with Sample Leaf:
+                <span className="text-[11px] font-bold text-soil-500 block mb-1.5 uppercase tracking-wider">
+                  Or Test with Sample Foliage:
                 </span>
                 <div className="flex gap-2">
                   <button
-    type="button"
-    onClick={() => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 224;
-      canvas.height = 224;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = "#4a7c2a";
-        ctx.fillRect(0, 0, 224, 224);
-        ctx.fillStyle = "#8b4513";
-        ctx.beginPath();
-        ctx.arc(100, 100, 35, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "#ffd700";
-        ctx.beginPath();
-        ctx.arc(140, 130, 25, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const sampleFile = new File([blob], "tomato_early_blight_sample.png", {
-            type: "image/png"
-          });
-          handleFileChange(sampleFile);
-          setCropName("Tomato");
-          setUserNotes("Concentric brown target-like rings observed on lower tomato leaves.");
-        }
-      });
-    }}
-    className="flex-1 py-1.5 px-2 rounded-lg bg-earth-100 hover:bg-earth-200 text-slate-700 text-[11px] font-medium transition-colors border border-slate-200"
-  >
-                    🍂 Tomato Blight Sample
+                    type="button"
+                    onClick={() => {
+                      const canvas = document.createElement("canvas");
+                      canvas.width = 224;
+                      canvas.height = 224;
+                      const ctx = canvas.getContext("2d");
+                      if (ctx) {
+                        ctx.fillStyle = "#3b6d2a";
+                        ctx.fillRect(0, 0, 224, 224);
+                        ctx.fillStyle = "#794628";
+                        ctx.beginPath();
+                        ctx.arc(95, 95, 40, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = "#e0a934";
+                        ctx.beginPath();
+                        ctx.arc(140, 130, 28, 0, Math.PI * 2);
+                        ctx.fill();
+                      }
+                      canvas.toBlob((blob) => {
+                        if (blob) {
+                          const sampleFile = new File([blob], "tomato_blight_sample.png", {
+                            type: "image/png"
+                          });
+                          handleFileChange(sampleFile);
+                          setCropName("Tomato");
+                          setUserNotes("Irregular water-soaked brown lesions on lower leaves.");
+                        }
+                      });
+                    }}
+                    className="flex-1 py-2 px-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-soil-800 text-[11px] font-bold transition-colors border border-sand-300 shadow-2xs cursor-pointer"
+                  >
+                    🍂 Blighted Leaf Sample
                   </button>
                   <button
-    type="button"
-    onClick={() => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 224;
-      canvas.height = 224;
-      const ctx = canvas.getContext("2d");
-      if (ctx) {
-        ctx.fillStyle = "#2d6a4f";
-        ctx.fillRect(0, 0, 224, 224);
-        ctx.strokeStyle = "#52b788";
-        ctx.lineWidth = 4;
-        ctx.beginPath();
-        ctx.moveTo(112, 20);
-        ctx.lineTo(112, 200);
-        ctx.stroke();
-      }
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const sampleFile = new File([blob], "healthy_leaf_sample.png", {
-            type: "image/png"
-          });
-          handleFileChange(sampleFile);
-          setCropName("Tomato");
-          setUserNotes("Lush green foliage with no visible spotting.");
-        }
-      });
-    }}
-    className="flex-1 py-1.5 px-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 text-[11px] font-medium transition-colors border border-emerald-200"
-  >
+                    type="button"
+                    onClick={() => {
+                      const canvas = document.createElement("canvas");
+                      canvas.width = 224;
+                      canvas.height = 224;
+                      const ctx = canvas.getContext("2d");
+                      if (ctx) {
+                        ctx.fillStyle = "#1e5e3a";
+                        ctx.fillRect(0, 0, 224, 224);
+                        ctx.strokeStyle = "#40916c";
+                        ctx.lineWidth = 5;
+                        ctx.beginPath();
+                        ctx.moveTo(112, 10);
+                        ctx.lineTo(112, 210);
+                        ctx.stroke();
+                      }
+                      canvas.toBlob((blob) => {
+                        if (blob) {
+                          const sampleFile = new File([blob], "healthy_leaf_sample.png", {
+                            type: "image/png"
+                          });
+                          handleFileChange(sampleFile);
+                          setCropName("Tomato");
+                          setUserNotes("Lush vibrant green leaf with no fungal spots.");
+                        }
+                      });
+                    }}
+                    className="flex-1 py-2 px-2.5 rounded-xl bg-leaf-50 hover:bg-leaf-100 text-leaf-900 text-[11px] font-bold transition-colors border border-leaf-300 shadow-2xs cursor-pointer"
+                  >
                     🌱 Healthy Leaf Sample
                   </button>
                 </div>
               </div>
 
               <Button
-    onClick={() => uploadMutation.mutate()}
-    disabled={!file}
-    isLoading={uploadMutation.isPending}
-    className="w-full mt-2 shadow-sm"
-    icon={<ScanLine className="w-4 h-4" />}
-  >
+                onClick={() => uploadMutation.mutate()}
+                disabled={!file}
+                isLoading={uploadMutation.isPending}
+                className="w-full mt-2 shadow-warm"
+                icon={<ScanLine className="w-4 h-4 text-leaf-200" />}
+              >
                 Scan & Diagnose Leaf
               </Button>
             </div>
           </Card>
         </div>
 
-        {
-    /* Diagnostic Results (7 cols on lg) */
-  }
+        {/* Diagnostic Results (7 cols on lg) */}
         <div className="lg:col-span-7">
-          {diagnosisResult ? <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
-              {
-    /* Primary Diagnosis Card */
-  }
+          {diagnosisResult ? (
+            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
+              {/* Primary Diagnosis Card */}
               <Card
-    className={`border-t-4 ${diagnosisResult.prediction.isHealthy ? "border-t-emerald-500 bg-emerald-50/20" : "border-t-rose-500 bg-rose-50/20"}`}
-  >
+                className={`border-t-4 ${
+                  diagnosisResult.prediction.isHealthy
+                    ? "border-t-leaf-600 bg-leaf-50/20"
+                    : "border-t-soil-600 bg-soil-50/20"
+                }`}
+              >
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+                      <span className="text-[11px] font-bold text-soil-400 uppercase tracking-wider">
                         Pathology Diagnosis
                       </span>
                       <Badge
-    variant={diagnosisResult.prediction.severity === "None" ? "success" : diagnosisResult.prediction.severity === "Severe" ? "danger" : "warning"}
-    size="sm"
-  >
+                        variant={
+                          diagnosisResult.prediction.severity === "None"
+                            ? "success"
+                            : diagnosisResult.prediction.severity === "Severe"
+                            ? "danger"
+                            : "warning"
+                        }
+                        size="sm"
+                      >
                         {diagnosisResult.prediction.severity} Severity
                       </Badge>
                     </div>
 
-                    <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+                    <h2 className="text-2xl font-black text-soil-900 tracking-tight">
                       {diagnosisResult.prediction.diseaseName}
                     </h2>
-                    {diagnosisResult.prediction.scientificName && <span className="text-xs text-slate-500 italic block mt-0.5">
+                    {diagnosisResult.prediction.scientificName && (
+                      <span className="text-xs text-soil-500 italic block mt-0.5 font-medium">
                         Pathogen: {diagnosisResult.prediction.scientificName}
-                      </span>}
+                      </span>
+                    )}
                   </div>
 
                   <div className="text-right">
-                    <span className="text-xs text-slate-400 block font-medium">Confidence</span>
-                    <span className="text-2xl font-black text-slate-900">
+                    <span className="text-xs text-soil-400 block font-semibold">Confidence</span>
+                    <span className="text-2xl font-black text-soil-900">
                       {Math.round(diagnosisResult.prediction.confidence * 100)}%
                     </span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white/80 border border-slate-200/80 text-xs text-slate-700 leading-relaxed my-3">
-                  <strong>Pathological Cause:</strong> {diagnosisResult.prediction.cause}
+                <div className="p-3.5 rounded-xl bg-[#fffefc] border border-sand-200 text-xs text-soil-800 leading-relaxed my-3 font-medium">
+                  <strong className="text-soil-900 font-bold">Pathological Cause:</strong>{" "}
+                  {diagnosisResult.prediction.cause}
                 </div>
 
-                {
-    /* Symptoms List */
-  }
-                {diagnosisResult.prediction.symptoms.length > 0 && <div className="my-4">
-                    <span className="text-xs font-bold text-slate-800 uppercase tracking-wider block mb-2">
+                {/* Symptoms List */}
+                {diagnosisResult.prediction.symptoms.length > 0 && (
+                  <div className="my-4">
+                    <span className="text-xs font-bold text-soil-800 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                      <Leaf className="w-3.5 h-3.5 text-leaf-600" />
                       Observed Foliage Symptoms
                     </span>
-                    <ul className="space-y-1.5 text-xs text-slate-600">
-                      {diagnosisResult.prediction.symptoms.map((s, idx) => <li key={idx} className="flex items-start gap-2">
-                          <span className="text-agri-600 font-bold">•</span>
-                          <span>{s}</span>
-                        </li>)}
+                    <ul className="space-y-1.5 text-xs text-soil-700">
+                      {diagnosisResult.prediction.symptoms.map((s, idx) => (
+                        <li key={idx} className="flex items-start gap-2">
+                          <span className="text-leaf-600 font-bold">•</span>
+                          <span className="font-medium">{s}</span>
+                        </li>
+                      ))}
                     </ul>
-                  </div>}
+                  </div>
+                )}
               </Card>
 
-              {
-    /* Treatment Protocols */
-  }
+              {/* Treatment Protocols */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="border-l-4 border-l-emerald-600">
-                  <h4 className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <Card className="border-l-4 border-l-leaf-600 bg-leaf-50/30">
+                  <h4 className="text-xs font-bold text-leaf-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-leaf-600" />
                     Organic & Bio-Control Remedies
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
-                    {diagnosisResult.prediction.organicTreatment.map((org, i) => <li key={i} className="flex items-start gap-2">
-                        <span className="text-emerald-600 font-bold">✓</span>
-                        <span>{org}</span>
-                      </li>)}
+                  <ul className="space-y-2 text-xs text-soil-700">
+                    {diagnosisResult.prediction.organicTreatment.map((org, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-leaf-600 font-bold">✓</span>
+                        <span className="font-medium">{org}</span>
+                      </li>
+                    ))}
                   </ul>
                 </Card>
 
-                <Card className="border-l-4 border-l-amber-600">
-                  <h4 className="text-xs font-bold text-amber-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <ShieldAlert className="w-4 h-4 text-amber-600" />
+                <Card className="border-l-4 border-l-soil-600 bg-soil-50/30">
+                  <h4 className="text-xs font-bold text-soil-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <ShieldAlert className="w-4 h-4 text-soil-600" />
                     Chemical Fungicide / Bactericide
                   </h4>
-                  <ul className="space-y-2 text-xs text-slate-600">
-                    {diagnosisResult.prediction.chemicalTreatment.map((chem, i) => <li key={i} className="flex items-start gap-2">
+                  <ul className="space-y-2 text-xs text-soil-700">
+                    {diagnosisResult.prediction.chemicalTreatment.map((chem, i) => (
+                      <li key={i} className="flex items-start gap-2">
                         <span className="text-amber-600 font-bold">⚠️</span>
-                        <span>{chem}</span>
-                      </li>)}
+                        <span className="font-medium">{chem}</span>
+                      </li>
+                    ))}
                   </ul>
                 </Card>
               </div>
 
-              {
-    /* Preventative Field Advice */
-  }
+              {/* Preventative Field Advice */}
               <Card>
-                <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-bold text-soil-800 uppercase tracking-wider mb-2">
                   Preventative Field Hygiene & Cultural Practices
                 </h4>
-                <div className="space-y-1.5 text-xs text-slate-600">
-                  {diagnosisResult.prediction.preventionTips.map((tip, i) => <div key={i} className="flex items-start gap-2">
-                      <span className="text-agri-600 font-bold">→</span>
-                      <span>{tip}</span>
-                    </div>)}
+                <div className="space-y-1.5 text-xs text-soil-700">
+                  {diagnosisResult.prediction.preventionTips.map((tip, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="text-leaf-600 font-bold">→</span>
+                      <span className="font-medium">{tip}</span>
+                    </div>
+                  ))}
                 </div>
               </Card>
 
-              {
-    /* Safety Advisory Disclaimer */
-  }
-              <div className="p-4 rounded-xl bg-amber-50/80 border border-amber-200/80 text-[11px] text-amber-900 flex items-start gap-2.5">
+              {/* Safety Advisory Disclaimer */}
+              <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-[11px] text-amber-950 flex items-start gap-2.5 shadow-2xs">
                 <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                <p className="leading-relaxed">
+                <p className="leading-relaxed font-medium">
                   <strong>Important Agronomic Notice:</strong> Computer vision image predictions provide diagnostic guidance based on visible leaf patterns. Before applying restricted agrochemicals, verify symptoms with your nearest local Krishi Vigyan Kendra (KVK) or government agricultural officer. Always observe safety withholding periods before harvest.
                 </p>
               </div>
-            </div> : <div className="h-full flex flex-col items-center justify-center p-12 text-center bg-white rounded-2xl border border-dashed border-slate-300 min-h-[420px]">
-              <div className="w-16 h-16 rounded-2xl bg-earth-100 text-earth-700 flex items-center justify-center mb-4">
-                <ScanLine className="w-8 h-8" />
+            </div>
+          ) : (
+            <div className="h-full flex flex-col items-center justify-center p-12 text-center bg-[#fffefc] rounded-3xl border border-dashed border-sand-300 min-h-[420px] shadow-warm">
+              <div className="w-16 h-16 rounded-2xl bg-sand-100 text-leaf-700 border border-sand-300 flex items-center justify-center mb-4 shadow-sm">
+                <Leaf className="w-8 h-8 text-leaf-600" />
               </div>
-              <h3 className="text-base font-bold text-slate-800">
+              <h3 className="text-base font-black text-soil-900">
                 Awaiting Leaf Photograph
               </h3>
-              <p className="mt-1.5 text-xs text-slate-500 max-w-sm leading-relaxed">
-                Take or upload a close-up picture of the affected plant leaf showing discoloration, spots, or wilt. The machine learning model will classify the pathogen and recommend organic and chemical treatments.
+              <p className="mt-1.5 text-xs text-soil-500 max-w-sm leading-relaxed font-medium">
+                Take or upload a close-up picture of the affected plant leaf showing discoloration, spots, or wilt. Gemini Vision AI will classify the pathogen and recommend organic and chemical treatments.
               </p>
-            </div>}
+            </div>
+          )}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };

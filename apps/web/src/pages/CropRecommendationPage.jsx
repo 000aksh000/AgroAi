@@ -100,15 +100,15 @@ export const CropRecommendationPage = () => {
       {
     /* Header */
   }
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-black text-soil-900 tracking-tight">
               AI Crop Recommendation Engine
             </h1>
-            <Badge variant="success" size="sm">Scikit-Learn ML</Badge>
+            <Badge variant="leaf" size="sm">Scikit-Learn ML</Badge>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-soil-500 mt-1 font-medium">
             Predict agronomically suitable crops based on soil nutrient testing and meteorological patterns.
           </p>
         </div>
@@ -175,8 +175,8 @@ export const CropRecommendationPage = () => {
               {
     /* Soil Macronutrients */
   }
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
-                <span className="text-xs font-bold text-slate-800 block">
+              <div className="p-3.5 rounded-2xl bg-sand-50/80 border border-sand-200/80 space-y-3">
+                <span className="text-xs font-bold text-soil-800 block">
                   Soil Nutrients (Soil Health Card)
                 </span>
 
@@ -258,8 +258,8 @@ export const CropRecommendationPage = () => {
               {
     /* Climate & Weather */
   }
-              <div className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 space-y-3">
-                <span className="text-xs font-bold text-slate-800 block">
+              <div className="p-3.5 rounded-2xl bg-sand-50/80 border border-sand-200/80 space-y-3">
+                <span className="text-xs font-bold text-soil-800 block">
                   Climate & Seasonal Factors
                 </span>
 

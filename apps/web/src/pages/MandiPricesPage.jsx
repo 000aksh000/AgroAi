@@ -96,22 +96,22 @@ export const MandiPricesPage = () => {
       {
     /* Header */
   }
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-black text-soil-900 tracking-tight">
               Agricultural Mandi & Market Prices
             </h1>
-            <Badge variant="success" size="sm">APMC & Agmarknet</Badge>
+            <Badge variant="leaf" size="sm">APMC & Agmarknet</Badge>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
+          <p className="text-xs text-soil-500 mt-1 font-medium">
             Track daily arrival prices, minimum/maximum/modal trading rates in INR (₹) per Quintal.
           </p>
         </div>
 
         <button
     onClick={() => refetch()}
-    className={`px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center gap-1.5 ${isFetching ? "opacity-70" : ""}`}
+    className={`px-3.5 py-2 rounded-xl border border-sand-300 bg-[#fffefc] hover:bg-sand-50 text-xs font-bold text-soil-800 flex items-center gap-1.5 shadow-2xs cursor-pointer ${isFetching ? "opacity-70" : ""}`}
   >
           <RefreshCw className={`w-3.5 h-3.5 ${isFetching ? "animate-spin" : ""}`} />
           Refresh Prices
@@ -124,7 +124,7 @@ export const MandiPricesPage = () => {
       <Card className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
           <div className="md:col-span-6 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-soil-400 absolute left-3 top-3" />
             <input
     type="text"
     placeholder="Search by crop, mandi market, or district (e.g. Onion, Khanna, Nashik)..."
@@ -133,7 +133,7 @@ export const MandiPricesPage = () => {
       setSearchTerm(e.target.value);
       setPage(1);
     }}
-    className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
+    className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-900"
   />
           </div>
 
@@ -144,7 +144,7 @@ export const MandiPricesPage = () => {
       setSelectedState(e.target.value);
       setPage(1);
     }}
-    className="w-full px-3 py-2 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white font-medium"
+    className="w-full px-3 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-900 font-bold cursor-pointer"
   >
               {INDIAN_STATES.map((st) => <option key={st} value={st}>{st}</option>)}
             </select>

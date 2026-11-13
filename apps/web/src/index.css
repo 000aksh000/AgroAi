@@ -4,33 +4,62 @@
 
 @layer base {
   body {
-    @apply bg-earth-50 text-slate-800 antialiased;
+    @apply bg-[#faf7f0] text-soil-900 antialiased selection:bg-leaf-200 selection:text-leaf-900;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-image: 
+      radial-gradient(at 10% 15%, rgba(205, 181, 144, 0.12) 0px, transparent 45%),
+      radial-gradient(at 90% 85%, rgba(78, 199, 132, 0.08) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(246, 241, 231, 0.5) 0px, transparent 100%);
+    background-attachment: fixed;
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars with warm soil tone */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f4eee2;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 3px;
+  background: #cdb590;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #ba9c71;
 }
 
-/* Glassmorphism utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+/* Sandy soil & leaf theme utilities */
+.sand-panel {
+  background: rgba(255, 253, 248, 0.92);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(224, 207, 180, 0.75);
+}
+
+.sand-card {
+  background: #fffefb;
+  border: 1px solid rgba(228, 212, 193, 0.85);
+  box-shadow: 0 2px 10px -2px rgba(133, 97, 66, 0.06), 0 1px 3px -1px rgba(133, 97, 66, 0.04);
+}
+
+.leaf-glow {
+  box-shadow: 0 0 20px -3px rgba(34, 197, 94, 0.3);
+}
+
+.earth-gradient {
+  background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 55%, #52796f 100%);
+}
+
+.soil-gradient {
+  background: linear-gradient(135deg, #473426 0%, #6b4c34 50%, #856142 100%);
+}
+
+.terracotta-badge {
+  background: #fdf5ef;
+  color: #96522c;
+  border: 1px solid #f2d0be;
 }
