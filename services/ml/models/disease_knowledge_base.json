@@ -1,0 +1,384 @@
+{
+  "Tomato___Early_blight": {
+    "diseaseName": "Tomato Early Blight",
+    "scientificName": "Alternaria solani",
+    "crop": "Tomato",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Dark brown to black spots with concentric rings (target-like pattern)",
+      "Lower and older leaves showing symptoms first",
+      "Yellow halo surrounding the circular leaf lesions",
+      "Premature leaf drop causing sunscald on fruits"
+    ],
+    "cause": "Fungal pathogen Alternaria solani thriving in warm temperatures (24-29\u00b0C) and high humidity or frequent rainfall.",
+    "preventionTips": [
+      "Practice 3-year crop rotation avoiding Solanaceae family (potato, eggplant, pepper)",
+      "Ensure adequate plant spacing for vigorous air circulation",
+      "Use drip irrigation instead of overhead sprinklers to keep foliage dry",
+      "Mulch the soil bed around tomato plants to prevent soil-borne spore splash"
+    ],
+    "organicTreatment": [
+      "Apply cold-pressed Neem Oil spray (5ml per liter of water with mild organic soap)",
+      "Foliar spray with Trichoderma viride or Bacillus subtilis bio-fungicide",
+      "Copper-based organic fungicide (Bordeaux mixture 1%) at first sign of spots"
+    ],
+    "chemicalTreatment": [
+      "Mancozeb 75% WP @ 2.0g per liter water as protective foliar spray",
+      "Azoxystrobin 23% SC @ 1.0ml per liter water for curative control",
+      "Chlorothalonil 75% WP @ 2.0g per liter with 7-day pre-harvest interval"
+    ],
+    "expertAdvisoryNotes": "Early intervention is critical. Remove infected lower leaves immediately and dispose of them away from the field. Do not compost diseased foliage."
+  },
+  "Tomato___Late_blight": {
+    "diseaseName": "Tomato Late Blight",
+    "scientificName": "Phytophthora infestans",
+    "crop": "Tomato",
+    "isHealthy": false,
+    "severity": "Severe",
+    "symptoms": [
+      "Irregular water-soaked dark lesions on leaves and stems",
+      "White, fuzzy fungal growth on undersides of leaves during humid mornings",
+      "Rapid collapse and browning of entire foliage",
+      "Brown greasy lesions on tomato fruits"
+    ],
+    "cause": "Oomycete pathogen Phytophthora infestans favored by cool, foggy, wet weather (15-22\u00b0C with humidity > 90%).",
+    "preventionTips": [
+      "Plant certified disease-free and resistant hybrid varieties",
+      "Avoid planting tomatoes near potatoes or downwind from potato fields",
+      "Prune lower suckers to maintain canopy ventilation"
+    ],
+    "organicTreatment": [
+      "Preventative copper hydroxide or copper oxychloride 50 WP sprays",
+      "Bio-control formulation of Pseudomonas fluorescens (10g/L)"
+    ],
+    "chemicalTreatment": [
+      "Metalaxyl 8% + Mancozeb 64% WP @ 2.5g per liter",
+      "Cymoxanil 8% + Mancozeb 64% WP @ 2.0g per liter water",
+      "Dimethomorph 50% WP @ 1.0g/L water during high disease pressure"
+    ],
+    "expertAdvisoryNotes": "Late blight can destroy an entire field within 7-10 days if unchecked. Spray systemic fungicides immediately upon early warning."
+  },
+  "Tomato___Bacterial_spot": {
+    "diseaseName": "Tomato Bacterial Spot",
+    "scientificName": "Xanthomonas perforans",
+    "crop": "Tomato",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Small, dark, angular, water-soaked leaf spots",
+      "Yellow haloes developing around old lesions",
+      "Rough, scab-like, raised dark spots on green tomato fruits"
+    ],
+    "cause": "Bacterium Xanthomonas, transmitted via infected seeds, splashing rain, and mechanical cultivation during wet weather.",
+    "preventionTips": [
+      "Use hot-water treated certified seeds (50\u00b0C for 25 minutes)",
+      "Avoid working in tomato fields when leaves are wet",
+      "Disinfect pruning tools and farm equipment with 10% sodium hypochlorite"
+    ],
+    "organicTreatment": [
+      "Copper sulfate formulation with lime (Bordeaux mixture)",
+      "Streptomyces-based biological bactericides"
+    ],
+    "chemicalTreatment": [
+      "Streptocycline (antibiotic) @ 0.5g + Copper Oxychloride @ 2.5g per 10 liters water",
+      "Kasugamycin 3% SL @ 2ml per liter"
+    ],
+    "expertAdvisoryNotes": "Bacterial infections cannot be cured with standard fungal sprays. Ensure bactericide application before rainfall."
+  },
+  "Tomato___healthy": {
+    "diseaseName": "Healthy Tomato Foliage",
+    "scientificName": "Solanum lycopersicum",
+    "crop": "Tomato",
+    "isHealthy": true,
+    "severity": "None",
+    "symptoms": [
+      "Foliage shows uniform deep green coloration with no visible necrotic spots, yellowing, or wilt."
+    ],
+    "cause": "Optimal plant health and balanced nutrition.",
+    "preventionTips": [
+      "Maintain regular soil moisture and avoid water stress",
+      "Apply balanced N-P-K fertilizer and micronutrients (calcium, magnesium, boron)",
+      "Monitor weekly for early signs of aphids or whiteflies"
+    ],
+    "organicTreatment": [
+      "Routine preventative spray of Panchagavya or seaweed extract (3ml/L) to strengthen plant immunity."
+    ],
+    "chemicalTreatment": [
+      "No chemical treatment required."
+    ],
+    "expertAdvisoryNotes": "Plant is currently healthy. Continue standard fertigation and crop scouting."
+  },
+  "Potato___Early_blight": {
+    "diseaseName": "Potato Early Blight",
+    "scientificName": "Alternaria solani",
+    "crop": "Potato",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Target-board dark circular spots with concentric rings on foliage",
+      "Yellowing and senescence of infected leaflets",
+      "Sunken, dry, leathery brown rot on potato tubers"
+    ],
+    "cause": "Alternaria solani fungus overwintering in infected plant debris and soil.",
+    "preventionTips": [
+      "Plant certified certified seed tubers",
+      "Ensure adequate nitrogen nutrition as nutrient-stressed plants are more susceptible",
+      "Destroy crop residue after harvest"
+    ],
+    "organicTreatment": [
+      "Foliar spray of Trichoderma harzianum @ 5g/L",
+      "Neem seed kernel extract (NSKE 5%)"
+    ],
+    "chemicalTreatment": [
+      "Mancozeb 75% WP @ 2g/L or Chlorothalonil 75% WP @ 2g/L",
+      "Propiconazole 25% EC @ 1ml/L"
+    ],
+    "expertAdvisoryNotes": "Apply protective fungicide when the crop canopy closes across rows."
+  },
+  "Potato___Late_blight": {
+    "diseaseName": "Potato Late Blight",
+    "scientificName": "Phytophthora infestans",
+    "crop": "Potato",
+    "isHealthy": false,
+    "severity": "Severe",
+    "symptoms": [
+      "Water-soaked dark lesions starting from leaf tips and margins",
+      "White downy fungal mildew on leaf undersides in high humidity",
+      "Foul-smelling decay and rotting of tubers in the field and storage"
+    ],
+    "cause": "Oomycete pathogen Phytophthora infestans, known historically for the Irish Potato Famine.",
+    "preventionTips": [
+      "Plant resistant cultivars (e.g., Kufri Girdhari, Kufri Himalini)",
+      "Hill up soil well over developing tubers to prevent spores washing into the soil bed"
+    ],
+    "organicTreatment": [
+      "Copper oxychloride 50 WP @ 3g/L",
+      "Foliar compost tea or cow urine extract spray (10%)"
+    ],
+    "chemicalTreatment": [
+      "Cymoxanil 8% + Mancozeb 64% WP @ 2.5g/L",
+      "Fenamidone 10% + Mancozeb 50% WG @ 2.5g/L"
+    ],
+    "expertAdvisoryNotes": "Follow local agro-meteorological advisories. Immediate action is critical before rainfall."
+  },
+  "Potato___healthy": {
+    "diseaseName": "Healthy Potato Plant",
+    "scientificName": "Solanum tuberosum",
+    "crop": "Potato",
+    "isHealthy": true,
+    "severity": "None",
+    "symptoms": [
+      "Leaves are healthy, turgid, and free of blemishes, blights, or curling."
+    ],
+    "cause": "Healthy growing conditions.",
+    "preventionTips": [
+      "Regular earthing-up (hilling) around 30 and 45 days after planting",
+      "Maintain optimal soil moisture avoiding water stagnation"
+    ],
+    "organicTreatment": [
+      "Maintain soil health with well-decomposed Farm Yard Manure (FYM)."
+    ],
+    "chemicalTreatment": [
+      "None needed."
+    ],
+    "expertAdvisoryNotes": "Maintain tuber bulking irrigation schedule."
+  },
+  "Rice___Leaf_Blast": {
+    "diseaseName": "Rice Leaf Blast",
+    "scientificName": "Magnaporthe oryzae",
+    "crop": "Rice / Paddy",
+    "isHealthy": false,
+    "severity": "Severe",
+    "symptoms": [
+      "Spindle-shaped or diamond-shaped lesions with gray-white centers and reddish-brown borders",
+      "Lesions coalesce causing complete burning and drying of leaf blades",
+      "Neck blast causing panicles to break and fail to fill grains"
+    ],
+    "cause": "Fungus Magnaporthe oryzae, highly destructive in rice fields with excess nitrogen and cool night temperatures (20-24\u00b0C) with dew.",
+    "preventionTips": [
+      "Avoid excessive nitrogenous fertilizer application; split nitrogen into 3-4 doses",
+      "Treat seeds before sowing with carbendazim or Pseudomonas",
+      "Maintain optimal field water depth to prevent drought stress"
+    ],
+    "organicTreatment": [
+      "Pseudomonas fluorescens seed treatment (10g/kg seed) and foliar spray @ 2g/L",
+      "Foliar spray with fermented cow urine + neem extract"
+    ],
+    "chemicalTreatment": [
+      "Tricyclazole 75% WP @ 0.6g per liter water (standard gold-standard treatment)",
+      "Isoprothiolane 40% EC @ 1.5ml per liter",
+      "Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 1.0ml/L"
+    ],
+    "expertAdvisoryNotes": "Rice blast can reduce paddy yield by up to 50-70%. Spray Tricyclazole at the first appearance of leaf spots and again at panicle emergence."
+  },
+  "Rice___Brown_Spot": {
+    "diseaseName": "Rice Brown Spot",
+    "scientificName": "Bipolaris oryzae",
+    "crop": "Rice / Paddy",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Small, circular to oval dark brown spots on leaf blades and glumes",
+      "Spots have yellowish halos resembling sesame seeds",
+      "Poor grain filling and discolored paddy grains"
+    ],
+    "cause": "Bipolaris oryzae fungus, often associated with nutrient-deficient or water-stressed soil (silicon/potassium deficiency).",
+    "preventionTips": [
+      "Improve soil fertility by applying balanced potassium and farmyard manure",
+      "Avoid severe intermittent drying of soil",
+      "Soak seeds in hot water (52-54\u00b0C for 10 min) before nursery sowing"
+    ],
+    "organicTreatment": [
+      "Foliar application of silica fertilizers (potassium silicate @ 2ml/L)",
+      "Neem oil spray @ 3ml/L"
+    ],
+    "chemicalTreatment": [
+      "Propiconazole 25% EC @ 1.0ml/L water",
+      "Mancozeb 75% WP @ 2.0g/L"
+    ],
+    "expertAdvisoryNotes": "Soil testing is recommended. Ensure potassium and zinc levels are adequate."
+  },
+  "Rice___healthy": {
+    "diseaseName": "Healthy Rice Crop",
+    "scientificName": "Oryza sativa",
+    "crop": "Rice / Paddy",
+    "isHealthy": true,
+    "severity": "None",
+    "symptoms": [
+      "Lush green erect leaves with no blast lesions, brown spots, or bacterial blight streaks."
+    ],
+    "cause": "Optimal agronomic management.",
+    "preventionTips": [
+      "Maintain 2-5 cm standing water during tillering and flowering",
+      "Apply recommended zinc sulfate at basal stage"
+    ],
+    "organicTreatment": [
+      "Apply Azospirillum and Phosphobacteria biofertilizers."
+    ],
+    "chemicalTreatment": [
+      "None needed."
+    ],
+    "expertAdvisoryNotes": "Keep monitoring water level and panicle initiation."
+  },
+  "Cotton___Bacterial_Blight": {
+    "diseaseName": "Cotton Bacterial Blight / Black Arm",
+    "scientificName": "Xanthomonas citri pv. malvacearum",
+    "crop": "Cotton",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Angular, water-soaked leaf spots bordered by leaf veins",
+      "Black lesions on stems (Black arm phase)",
+      "Water-soaked spots on cotton bolls resulting in stained, discolored lint"
+    ],
+    "cause": "Xanthomonas bacteria spreading via seed infection, rain splashes, and wind.",
+    "preventionTips": [
+      "Delint seeds with concentrated sulfuric acid before sowing",
+      "Use certified resistant Bt-cotton cultivars",
+      "Destroy infected crop residues after harvest"
+    ],
+    "organicTreatment": [
+      "Copper hydroxide 53.8% DF @ 2.0g/L",
+      "Pseudomonas fluorescens foliar spray @ 5g/L"
+    ],
+    "chemicalTreatment": [
+      "Streptocycline 1g + Copper Oxychloride 25g in 10 liters of water",
+      "Spray twice at 15-day intervals during vegetative growth"
+    ],
+    "expertAdvisoryNotes": "Early vegetative protection prevents black arm phase which causes stem breakage."
+  },
+  "Cotton___healthy": {
+    "diseaseName": "Healthy Cotton Plant",
+    "scientificName": "Gossypium hirsutum",
+    "crop": "Cotton",
+    "isHealthy": true,
+    "severity": "None",
+    "symptoms": [
+      "Broad, vibrant green leaves with no vein-banding, boll rot, or angular water-soaked lesions."
+    ],
+    "cause": "Healthy crop vigor.",
+    "preventionTips": [
+      "Install yellow sticky traps for whitefly and jassid pest monitoring",
+      "Avoid excessive vegetative growth by timely pinching"
+    ],
+    "organicTreatment": [
+      "Pheromone traps for pink bollworm monitoring."
+    ],
+    "chemicalTreatment": [
+      "None needed."
+    ],
+    "expertAdvisoryNotes": "Monitor square formation and boll retention."
+  },
+  "Corn___Common_rust": {
+    "diseaseName": "Corn Common Rust",
+    "scientificName": "Puccinia sorghi",
+    "crop": "Corn / Maize",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Small, elongated cinnamon-brown pustules scattered across both leaf surfaces",
+      "Pustules rupture the leaf epidermis exposing powdery brown spores",
+      "Severe leaf chlorosis and premature dry-down"
+    ],
+    "cause": "Fungus Puccinia sorghi, favored by moderate temperatures (16-25\u00b0C) and high relative humidity.",
+    "preventionTips": [
+      "Plant rust-tolerant maize hybrids",
+      "Rotate with non-host legume crops"
+    ],
+    "organicTreatment": [
+      "Sulfur 80% WDG dust or spray @ 3g/L",
+      "Trichoderma viride bio-spray"
+    ],
+    "chemicalTreatment": [
+      "Azoxystrobin 18.2% + Difenoconazole 11.4% SC @ 1.0ml/L",
+      "Mancozeb 75% WP @ 2.5g/L"
+    ],
+    "expertAdvisoryNotes": "Fungicide is generally cost-effective if rust develops prior to silking stage."
+  },
+  "Corn___Northern_Leaf_Blight": {
+    "diseaseName": "Corn Northern Leaf Blight",
+    "scientificName": "Exserohilum turcicum",
+    "crop": "Corn / Maize",
+    "isHealthy": false,
+    "severity": "Moderate",
+    "symptoms": [
+      "Large, elongated, cigar-shaped grayish-green to tan lesions (2.5 to 15 cm long)",
+      "Lesions start on lower leaves and progress upwards",
+      "Extensive leaf blighting giving foliage a burned appearance"
+    ],
+    "cause": "Exserohilum turcicum fungus surviving in crop debris during wet, humid weather.",
+    "preventionTips": [
+      "Deep tillage to bury corn residue",
+      "Two-year crop rotation with legumes or oilseeds"
+    ],
+    "organicTreatment": [
+      "Bio-priming seeds with Trichoderma harzianum."
+    ],
+    "chemicalTreatment": [
+      "Azoxystrobin 23% SC @ 1ml/L or Pyraclostrobin 20% WG @ 1g/L."
+    ],
+    "expertAdvisoryNotes": "Protect the ear leaf and leaves above the ear during grain fill."
+  },
+  "Corn___healthy": {
+    "diseaseName": "Healthy Corn Plant",
+    "scientificName": "Zea mays",
+    "crop": "Corn / Maize",
+    "isHealthy": true,
+    "severity": "None",
+    "symptoms": [
+      "Healthy, uniform green arching leaves without rust pustules or cigar-shaped blights."
+    ],
+    "cause": "Optimal crop nutrition and growing conditions.",
+    "preventionTips": [
+      "Ensure adequate nitrogen and zinc nutrition."
+    ],
+    "organicTreatment": [
+      "Enrich soil with mycorrhizal fungi (VAM)."
+    ],
+    "chemicalTreatment": [
+      "None needed."
+    ],
+    "expertAdvisoryNotes": "Monitor tassel and silk emergence."
+  }
+}

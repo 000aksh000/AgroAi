@@ -1,0 +1,39 @@
+# ==============================================================================
+# AgroSmart AI — React Vite Web Application Dockerfile
+# Multi-stage build with Nginx Alpine
+# ==============================================================================
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY packages/ ./packages/
+COPY apps/web/ ./apps/web/
+
+RUN npm install
+RUN npm run build --workspace=@agrosmart/shared-types
+RUN npm run build --workspace=@agrosmart/shared-validation
+RUN npm run build --workspace=@agrosmart/web
+
+FROM nginx:alpine AS runner
+
+COPY --from=builder /app/apps/web/dist /usr/share/nginx/html
+
+# Nginx single page app routing configuration
+RUN echo 'server { \
+    listen 80; \
+    server_name localhost; \
+    location / { \
+        root /usr/share/nginx/html; \
+        index index.html index.htm; \
+        try_files $$uri $$uri/ /index.html; \
+    } \
+    error_page 500 502 503 504 /50x.html; \
+    location = /50x.html { \
+        root /usr/share/nginx/html; \
+    } \
+}' > /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

@@ -1,0 +1,24 @@
+{
+  "name": "agrosmart-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AgroSmart AI - Production-Ready Full-Stack AI Agriculture Platform",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"API,WEB\" -c \"blue,green\" \"npm run dev --workspace=apps/api\" \"npm run dev --workspace=apps/web\"",
+    "dev:all": "concurrently -n \"API,WEB,ML\" -c \"blue,green,magenta\" \"npm run dev --workspace=apps/api\" \"npm run dev --workspace=apps/web\" \"npm run dev:ml\"",
+    "dev:api": "npm run dev --workspace=apps/api",
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:ml": "cd services/ml && venv\\Scripts\\uvicorn app.main:app --host 127.0.0.1 --port 8001 --reload",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.2"
+  }
+}

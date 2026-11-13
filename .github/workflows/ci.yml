@@ -1,0 +1,59 @@
+name: AgroSmart AI CI Pipeline
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Node Dependencies
+        run: npm ci || npm install
+
+      - name: Build Shared Packages
+        run: |
+          npm run build --workspace=@agrosmart/shared-types
+          npm run build --workspace=@agrosmart/shared-validation
+
+      - name: Run Backend & Frontend Tests
+        run: npm run test
+
+      - name: Build Production API & Web Bundles
+        run: |
+          npm run build --workspace=@agrosmart/api
+          npm run build --workspace=@agrosmart/web
+
+      - name: Install Python ML Dependencies
+        run: |
+          cd services/ml
+          pip install -r requirements.txt
+
+      - name: Train and Evaluate Crop & Disease Models
+        run: |
+          cd services/ml
+          python training/train_crop_model.py
+          python training/train_disease_model.py
+
+      - name: Run Python ML Pytest Suite
+        run: |
+          cd services/ml
+          pytest tests/test_ml_service.py -v
