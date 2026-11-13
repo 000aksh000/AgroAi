@@ -20,6 +20,26 @@ from PIL import Image
 
 # Add parent directory to path for training/feature utilities
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# Load .env file manually into os.environ
+def _load_env_file():
+    env_paths = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '.env')),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.env')),
+        os.path.abspath('.env'),
+    ]
+    for p in env_paths:
+        if os.path.exists(p):
+            with open(p, 'r', encoding='utf-8', errors='ignore') as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith('#') and '=' in line:
+                        k, v = line.split('=', 1)
+                        k, v = k.strip(), v.strip()
+                        if k and not os.environ.get(k):
+                            os.environ[k] = v
+
+_load_env_file()
 try:
     from training.train_disease_model import (
         DISEASE_KNOWLEDGE_BASE,
@@ -421,7 +441,7 @@ async def chat_with_assistant(req: AssistantRequest):
 
     # If Gemini API key is configured
     if gemini_key:
-        models = ["gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-2.5-flash"]
+        models = ["gemini-3.5-flash-lite", "gemini-3.1-flash-lite"]
         system_instruction = (
             "You are AgroSmart AI, an expert agricultural scientist and advisor for Indian farmers. "
             "Provide actionable, culturally appropriate, scientifically grounded farming advice using metric units, "
