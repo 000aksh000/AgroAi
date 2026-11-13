@@ -1,8 +1,8 @@
 {
-  "name": "agrosmart-ai",
+  "name": "agroai",
   "version": "1.0.0",
   "private": true,
-  "description": "AgroSmart AI - Production-Ready Full-Stack AI Agriculture Platform",
+  "description": "AgroAI - Intelligent Full-Stack Precision Agriculture & Farm Advisory Platform",
   "workspaces": [
     "packages/*",
     "apps/*"

@@ -1,13 +1,13 @@
-# AgroSmart AI — System Architecture
+# AgroAI — System Architecture
 
 ## 1. Overview
-AgroSmart AI is an end-to-end smart agriculture platform engineered for Indian farmers. The platform provides soil-driven crop recommendations, computer vision leaf disease diagnostics, hyperlocal agricultural weather advisories, APMC mandi live market price tracking, and conversational AI assistance.
+AgroAI is an end-to-end intelligent precision agriculture platform engineered for Indian farmers, agronomists, and agricultural researchers. The platform provides soil-driven crop recommendations, computer vision leaf disease diagnostics, hyperlocal agricultural weather advisories with spraying suitability indices, APMC mandi live market price tracking, and conversational AI assistance.
 
 ## 2. High-Level Architecture Diagram
 ```
                      +---------------------------------------+
-                     |         React.js + Vite Web App       |
-                     | (Tailwind CSS, TanStack Query, Recharts)|
+                     |         React 18 + Vite 6 Web App     |
+                     |  (Dark Vintage Botanical, Recharts)   |
                      +---------------------------------------+
                                          |
                                          | HTTPS / REST (JSON)
@@ -32,14 +32,22 @@ AgroSmart AI is an end-to-end smart agriculture platform engineered for Indian f
 ## 3. Component Breakdown
 
 ### Frontend (`apps/web`)
-- **Framework**: React 18 with TypeScript and Vite.
-- **Styling**: Tailwind CSS tailored with natural agricultural emeralds (`#16a34a`), warm harvest gold (`#f59e0b`), and earthy neutrals.
+- **Framework**: React 18 with Vite 6 in modern JavaScript (ES Modules / JSX).
+- **Styling**: Tailwind CSS with custom **Dark Vintage Botanical** design tokens:
+  - Deep Forest Shadow (`#101B16`)
+  - Rich Dark Foliage (`#18251D`)
+  - Slate Green Card Background (`#202B22`)
+  - Antique Gold & Brass (`#B69A62` / `#D4BE8D`)
+  - Rich Agricultural Soil (`#79563C`)
+  - Parchment Ivory (`#F0EBDD`)
+  - Muted Moss Green (`#71805A`)
+- **Typography**: Editorial serif headings (`Playfair Display`, `DM Serif Display`) with modern sans-serif (`Inter`) for metrics and forms.
 - **Routing**: React Router with protected shells (`/dashboard`, `/farms`, `/crop-recommendation`, `/disease-detection`, `/weather`, `/mandi-prices`, `/assistant`, `/history`, `/profile`, `/admin`).
 - **Data Fetching & Caching**: TanStack Query (`@tanstack/react-query`) with automatic background refetching and cache invalidation.
 - **Visual Analytics**: Recharts for 7-day temperature curves, precipitation volume bars, and mandi commodity modal price history lines.
 
 ### Backend (`apps/api`)
-- **Runtime**: Node.js 20+ with Express.js in TypeScript.
+- **Runtime**: Node.js 20+ with Express.js in modern JavaScript (ES Modules).
 - **Database Layer**: Mongoose 8 connecting to MongoDB Atlas or local MongoDB, with automatic zero-configuration fallback to `mongodb-memory-server` in development.
 - **Authentication**: JWT access tokens (15m expiry) and secure refresh tokens (7d expiry) rotated upon renewal and revocable on logout.
 - **Security Middleware**: Helmet security headers, CORS origin whitelisting, Zod payload validation, request IDs (`X-Request-Id`), and centralized error handling.
