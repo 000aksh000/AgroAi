@@ -4,13 +4,21 @@
 
 @layer base {
   body {
-    @apply bg-[#faf7f0] text-soil-900 antialiased selection:bg-leaf-200 selection:text-leaf-900;
+    background-color: #faf7f0;
+    color: #473426;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     background-image: 
       radial-gradient(at 10% 15%, rgba(205, 181, 144, 0.12) 0px, transparent 45%),
       radial-gradient(at 90% 85%, rgba(78, 199, 132, 0.08) 0px, transparent 50%),
       radial-gradient(at 50% 50%, rgba(246, 241, 231, 0.5) 0px, transparent 100%);
     background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: #b9edcb;
+    color: #16482f;
   }
 }
 
