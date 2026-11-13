@@ -55,30 +55,30 @@ export const HistoryPage = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#2D3B30]">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black text-charcoal tracking-tight">
-              Prediction & Diagnostic History
+            <h1 className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
+              Field Intelligence & Diagnostic Log
             </h1>
-            <Badge variant="leaf" size="sm">Persistent Logs</Badge>
+            <Badge variant="gold" size="sm">Historical Registry</Badge>
           </div>
-          <p className="text-xs text-muted mt-1 font-medium">
-            Browse, review, and compare past AI crop recommendations and computer vision leaf scans.
+          <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+            Review past soil crop recommendations and computer vision leaf scans with time-stamped parameters.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-white rounded-xl border border-[#E5E8DD] text-xs">
+        <div className="flex items-center gap-1.5 p-1 bg-[#18251D] rounded-xl border border-[#2D3B30] text-xs">
           <button
             onClick={() => {
               setFilterType("all");
               setPage(1);
             }}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               filterType === "all"
-                ? "bg-forest-700 text-white shadow-2xs"
-                : "text-muted hover:text-charcoal"
+                ? "bg-[#294C36] text-[#F0EBDD] border border-[#B69A62]/40 shadow-subtle font-semibold"
+                : "text-[#A5AA96] hover:text-[#F0EBDD]"
             }`}
           >
             All Activity
@@ -88,10 +88,10 @@ export const HistoryPage = () => {
               setFilterType("crop");
               setPage(1);
             }}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               filterType === "crop"
-                ? "bg-forest-700 text-white shadow-2xs"
-                : "text-muted hover:text-charcoal"
+                ? "bg-[#294C36] text-[#F0EBDD] border border-[#B69A62]/40 shadow-subtle font-semibold"
+                : "text-[#A5AA96] hover:text-[#F0EBDD]"
             }`}
           >
             Crop AI
@@ -101,10 +101,10 @@ export const HistoryPage = () => {
               setFilterType("disease");
               setPage(1);
             }}
-            className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg font-medium transition-all cursor-pointer ${
               filterType === "disease"
-                ? "bg-forest-700 text-white shadow-2xs"
-                : "text-muted hover:text-charcoal"
+                ? "bg-[#294C36] text-[#F0EBDD] border border-[#B69A62]/40 shadow-subtle font-semibold"
+                : "text-[#A5AA96] hover:text-[#F0EBDD]"
             }`}
           >
             Disease Scans
@@ -116,11 +116,11 @@ export const HistoryPage = () => {
       {isLoading ? (
         <LoadingSkeleton count={5} className="h-20 mb-3" />
       ) : records.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-[#CCD3C0]">
-          <HistoryIcon className="w-12 h-12 text-muted/60 mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-charcoal">No Prediction Records Found</h3>
-          <p className="text-xs text-muted mt-1 font-medium">
-            Run a crop recommendation or leaf diagnosis to see your activity timeline here.
+        <div className="text-center py-16 bg-[#18251D] rounded-2xl border border-dashed border-[#2D3B30]">
+          <HistoryIcon className="w-12 h-12 text-[#A5AA96]/50 mx-auto mb-3" />
+          <h3 className="text-sm font-serif font-bold text-[#F0EBDD]">No Historical Records Found</h3>
+          <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+            Execute a crop recommendation or leaf diagnosis to catalog an entry here.
           </p>
         </div>
       ) : (
@@ -138,8 +138,8 @@ export const HistoryPage = () => {
                   <div
                     className={`p-2.5 rounded-xl flex-shrink-0 border ${
                       isCrop
-                        ? "bg-forest-50 text-forest-700 border-forest-100"
-                        : "bg-sand-100 text-soil-700 border-sand-200"
+                        ? "bg-[#294C36]/40 text-[#A4D5A4] border-[#294C36]"
+                        : "bg-[#79563C]/35 text-[#D5BEA8] border-[#79563C]/60"
                     }`}
                   >
                     {isCrop ? <Wheat className="w-5 h-5" /> : <ScanLine className="w-5 h-5" />}
@@ -147,14 +147,14 @@ export const HistoryPage = () => {
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <h4 className="font-bold text-charcoal text-sm truncate">{rec.title}</h4>
+                      <h4 className="font-serif font-bold text-[#F0EBDD] text-sm truncate">{rec.title}</h4>
                       <Badge variant={isCrop ? "leaf" : rec.isHealthy ? "leaf" : "warning"} size="sm">
                         {Math.round(rec.confidence * 100)}% Match
                       </Badge>
                     </div>
-                    <p className="text-xs text-muted truncate max-w-xl mt-0.5">{rec.summary}</p>
-                    <span className="text-[10px] text-muted flex items-center gap-1 mt-1">
-                      <Calendar className="w-3 h-3 text-soil-500" />
+                    <p className="text-xs text-[#A5AA96] truncate max-w-xl mt-0.5">{rec.summary}</p>
+                    <span className="text-[10px] text-[#A5AA96] flex items-center gap-1 mt-1 font-mono">
+                      <Calendar className="w-3 h-3 text-[#B69A62]" />
                       {new Date(rec.createdAt).toLocaleDateString("en-IN", {
                         year: "numeric",
                         month: "short",
@@ -162,23 +162,23 @@ export const HistoryPage = () => {
                         hour: "2-digit",
                         minute: "2-digit"
                       })}
-                      {rec.farmName && ` • Farm: ${rec.farmName}`}
+                      {rec.farmName && ` • Parcel: ${rec.farmName}`}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 flex-shrink-0">
-                  <Button variant="ghost" size="sm" icon={<Eye className="w-4 h-4" />}>
+                  <Button variant="ghost" size="sm" icon={<Eye className="w-4 h-4 text-[#D4BE8D]" />}>
                     Details
                   </Button>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
-                      if (confirm("Permanently delete this prediction record?")) {
+                      if (confirm("Permanently delete this entry?")) {
                         deleteRecordMutation.mutate({ id: rec.id, type: rec.type });
                       }
                     }}
-                    className="p-1.5 text-muted hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                    className="p-1.5 text-[#A5AA96] hover:text-rose-400 hover:bg-[#18251D] rounded-lg transition-colors cursor-pointer"
                   >
                     <Trash2 className="w-4 h-4" />
                   </button>
@@ -198,16 +198,16 @@ export const HistoryPage = () => {
       >
         {selectedRecord && (
           <div className="space-y-4 text-xs">
-            <div className="p-3.5 rounded-xl bg-sand-50 border border-[#E5E8DD] flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-[#101B16] border border-[#2D3B30] flex items-center justify-between">
               <div>
-                <span className="text-muted block text-[10px] uppercase font-semibold">Logged On</span>
-                <span className="font-bold text-charcoal">
+                <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Logged On</span>
+                <span className="font-mono text-[#F0EBDD]">
                   {new Date(selectedRecord.createdAt).toLocaleString()}
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-muted block text-[10px] uppercase font-semibold">Model Confidence</span>
-                <span className="font-black text-forest-800 text-sm">
+                <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Model Certainty</span>
+                <span className="font-serif font-bold text-[#D4BE8D] text-base">
                   {Math.round(selectedRecord.confidence * 100)}%
                 </span>
               </div>
@@ -215,46 +215,46 @@ export const HistoryPage = () => {
 
             {selectedRecord.type === "crop_recommendation" ? (
               <div className="space-y-3">
-                <div className="p-3.5 bg-forest-50/70 border border-forest-100 rounded-xl text-forest-900 leading-relaxed">
-                  <strong className="text-forest-800">Agronomic Rationale:</strong> {selectedRecord.details?.result?.rationale}
+                <div className="p-3.5 bg-[#18251D] border border-[#294C36] rounded-xl text-[#D9CEB5] leading-relaxed">
+                  <strong className="text-[#A4D5A4]">Agronomic Rationale:</strong> {selectedRecord.details?.result?.rationale}
                 </div>
 
-                <h4 className="font-bold text-charcoal uppercase tracking-wider text-[11px]">
-                  Submitted Soil & Climate Inputs
+                <h4 className="font-serif font-bold text-[#D4BE8D] uppercase tracking-wider text-[11px]">
+                  Submitted Soil & Climate Parameters
                 </h4>
-                <div className="grid grid-cols-3 gap-2 p-3 bg-sand-50/70 border border-[#E5E8DD] rounded-xl text-charcoal">
-                  <div>N: <strong className="text-forest-800">{selectedRecord.details?.input?.nitrogen} kg/ha</strong></div>
-                  <div>P: <strong className="text-forest-800">{selectedRecord.details?.input?.phosphorus} kg/ha</strong></div>
-                  <div>K: <strong className="text-forest-800">{selectedRecord.details?.input?.potassium} kg/ha</strong></div>
-                  <div>pH: <strong className="text-forest-800">{selectedRecord.details?.input?.soilPh}</strong></div>
-                  <div>Temp: <strong className="text-forest-800">{selectedRecord.details?.input?.temperature}°C</strong></div>
-                  <div>Rainfall: <strong className="text-forest-800">{selectedRecord.details?.input?.rainfall} mm</strong></div>
+                <div className="grid grid-cols-3 gap-2.5 p-3.5 bg-[#101B16] border border-[#2D3B30] rounded-xl text-[#F0EBDD] font-mono">
+                  <div>N: <strong className="text-[#A4D5A4]">{selectedRecord.details?.input?.nitrogen} kg/ha</strong></div>
+                  <div>P: <strong className="text-[#A4D5A4]">{selectedRecord.details?.input?.phosphorus} kg/ha</strong></div>
+                  <div>K: <strong className="text-[#A4D5A4]">{selectedRecord.details?.input?.potassium} kg/ha</strong></div>
+                  <div>pH: <strong className="text-[#D4BE8D]">{selectedRecord.details?.input?.soilPh}</strong></div>
+                  <div>Temp: <strong className="text-[#D4BE8D]">{selectedRecord.details?.input?.temperature}°C</strong></div>
+                  <div>Rain: <strong className="text-[#D4BE8D]">{selectedRecord.details?.input?.rainfall} mm</strong></div>
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-charcoal uppercase tracking-wider text-[11px] mb-1">
-                    Fertilizer Advice
+                  <h4 className="font-serif font-bold text-[#D4BE8D] uppercase tracking-wider text-[11px] mb-1">
+                    Fertilizer Regimen
                   </h4>
-                  <p className="text-muted leading-relaxed">
+                  <p className="text-[#A5AA96] leading-relaxed">
                     {selectedRecord.details?.result?.agronomicAdvice?.fertilizerGuidance}
                   </p>
                 </div>
               </div>
             ) : (
               <div className="space-y-3">
-                <div className="p-3.5 bg-amber-50/70 border border-amber-200/80 rounded-xl text-amber-900 leading-relaxed">
-                  <strong className="text-amber-800">Pathogen & Cause:</strong> {selectedRecord.details?.result?.prediction?.cause}
+                <div className="p-3.5 bg-[#18251D] border border-[#79563C]/60 rounded-xl text-[#D9CEB5] leading-relaxed">
+                  <strong className="text-[#D4BE8D]">Pathogen Pathology:</strong> {selectedRecord.details?.result?.prediction?.cause}
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-charcoal uppercase tracking-wider text-[11px] mb-1.5 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-forest-700" />
+                  <h4 className="font-serif font-bold text-[#A4D5A4] uppercase tracking-wider text-[11px] mb-1.5 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#A4D5A4]" />
                     Organic Treatment Protocol
                   </h4>
-                  <ul className="space-y-1 text-charcoal">
+                  <ul className="space-y-1 text-[#D9CEB5]">
                     {selectedRecord.details?.result?.prediction?.organicTreatment?.map((t, i) => (
                       <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-forest-600 font-bold">•</span>
+                        <span className="text-[#A4D5A4] font-bold">•</span>
                         <span>{t}</span>
                       </li>
                     ))}
@@ -262,14 +262,14 @@ export const HistoryPage = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-bold text-charcoal uppercase tracking-wider text-[11px] mb-1.5 flex items-center gap-1.5">
-                    <AlertTriangle className="w-3.5 h-3.5 text-soil-600" />
-                    Chemical Treatment Protocol
+                  <h4 className="font-serif font-bold text-[#D5BEA8] uppercase tracking-wider text-[11px] mb-1.5 flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 text-[#B69A62]" />
+                    Chemical Fungicide / Bactericide
                   </h4>
-                  <ul className="space-y-1 text-charcoal">
+                  <ul className="space-y-1 text-[#D9CEB5]">
                     {selectedRecord.details?.result?.prediction?.chemicalTreatment?.map((t, i) => (
                       <li key={i} className="flex items-start gap-1.5">
-                        <span className="text-soil-600 font-bold">•</span>
+                        <span className="text-[#B69A62] font-bold">•</span>
                         <span>{t}</span>
                       </li>
                     ))}
@@ -278,9 +278,9 @@ export const HistoryPage = () => {
               </div>
             )}
 
-            <div className="pt-3 border-t border-[#E5E8DD] flex justify-end">
+            <div className="pt-3 border-t border-[#2D3B30] flex justify-end">
               <Button size="sm" variant="outline" onClick={() => setSelectedRecord(null)}>
-                Close
+                Close Record
               </Button>
             </div>
           </div>

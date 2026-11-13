@@ -113,18 +113,18 @@ export const WeatherPage = () => {
   return (
     <div className="space-y-6">
       {/* Header & Search */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-4 border-b border-[#2D3B30]">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-bold text-[#202820] tracking-tight">
-              Agronomic Weather & Forecast
+            <h1 className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
+              Agronomic Meteorological Observatory
             </h1>
-            <Badge variant="leaf" size="sm">
+            <Badge variant="gold" size="sm">
               Open-Meteo Live
             </Badge>
           </div>
-          <p className="text-xs text-[#788579] mt-1 font-medium">
-            Real-time meteorological monitoring and agricultural field-spraying windows for Indian farmers.
+          <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+            Real-time micro-climate monitoring and agricultural spray windows tailored for field operations.
           </p>
         </div>
 
@@ -132,16 +132,16 @@ export const WeatherPage = () => {
         <div className="flex items-center gap-2 w-full md:w-auto">
           <form onSubmit={handleSearch} className="flex items-center gap-2 flex-1 md:w-72">
             <div className="relative flex-1">
-              <Search className="w-4 h-4 text-[#788579] absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-[#A5AA96] absolute left-3 top-2.5" />
               <input
                 type="text"
-                placeholder="Search city, district, or state..."
+                placeholder="Search district, mandi, or state..."
                 value={cityInput}
                 onChange={(e) => setCityInput(e.target.value)}
-                className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-[#DCE1D3] focus:outline-none focus:ring-2 focus:ring-[#174C35] bg-white text-[#202820]"
+                className="w-full pl-9 pr-3 py-1.5 text-xs rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD] placeholder:text-[#A5AA96]/50"
               />
             </div>
-            <Button type="submit" size="sm">
+            <Button type="submit" size="sm" className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40">
               Search
             </Button>
           </form>
@@ -153,9 +153,9 @@ export const WeatherPage = () => {
             onClick={handleUseGps}
             isLoading={isLocating}
             title="Use current GPS location"
-            className="flex items-center gap-1.5 whitespace-nowrap"
+            className="flex items-center gap-1.5 whitespace-nowrap border-[#B69A62]/40 text-[#D4BE8D]"
           >
-            <MapPin className="w-3.5 h-3.5 text-[#174C35]" />
+            <MapPin className="w-3.5 h-3.5 text-[#B69A62]" />
             <span className="hidden sm:inline">Locate</span>
           </Button>
         </div>
@@ -163,21 +163,21 @@ export const WeatherPage = () => {
 
       {/* Quick Location Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-        <span className="text-[#788579] font-medium flex-shrink-0">Locations:</span>
+        <span className="text-[#A5AA96] font-medium flex-shrink-0 font-serif italic">Districts:</span>
         {selectedFarm && (
           <button
             onClick={() => {
               setGpsCoords(null);
               setActiveCity(selectedFarm.district || selectedFarm.name);
             }}
-            className={`px-2.5 py-1 rounded-md font-semibold flex items-center gap-1 flex-shrink-0 transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl font-medium flex items-center gap-1.5 flex-shrink-0 transition-colors cursor-pointer border ${
               !gpsCoords &&
               activeCity.toLowerCase() === (selectedFarm.district || selectedFarm.name).toLowerCase()
-                ? "bg-[#174C35] text-white"
-                : "bg-[#F0F6F3] text-[#174C35] hover:bg-[#E4F4E4]"
+                ? "bg-[#202B22] text-[#F0EBDD] border-[#B69A62] shadow-subtle"
+                : "bg-[#18251D] text-[#D9CEB5] border-[#2D3B30] hover:bg-[#202B22]"
             }`}
           >
-            <Tractor className="w-3 h-3" /> {selectedFarm.name}
+            <Tractor className="w-3 h-3 text-[#B69A62]" /> {selectedFarm.name}
           </button>
         )}
         {POPULAR_AGRI_DISTRICTS.map((dist) => (
@@ -187,10 +187,10 @@ export const WeatherPage = () => {
               setGpsCoords(null);
               setActiveCity(dist);
             }}
-            className={`px-2.5 py-1 rounded-md flex-shrink-0 transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-xl flex-shrink-0 transition-colors cursor-pointer border ${
               !gpsCoords && activeCity.toLowerCase() === dist.toLowerCase()
-                ? "bg-[#202820] text-white font-semibold"
-                : "bg-white border border-[#E5E8DD] text-[#202820] hover:bg-[#F7F8F2]"
+                ? "bg-[#202B22] text-[#F0EBDD] font-semibold border-[#B69A62] shadow-subtle"
+                : "bg-[#18251D] border border-[#2D3B30] text-[#A5AA96] hover:bg-[#202B22] hover:text-[#F0EBDD]"
             }`}
           >
             {dist}
@@ -205,19 +205,19 @@ export const WeatherPage = () => {
           {/* Top Conditions & Advisories Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Current Weather Card */}
-            <Card className="lg:col-span-5 bg-[#174C35] text-white border-[#123D2A]">
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <Card className="lg:col-span-5 bg-gradient-to-br from-[#18251D] via-[#202B22] to-[#121E17] text-[#F0EBDD] border-[#B69A62]/35 shadow-card">
+              <div className="flex items-center justify-between pb-3.5 border-b border-[#2D3B30]">
                 <div>
-                  <h3 className="font-bold text-base text-white">{weather.location.city}</h3>
-                  <span className="text-xs text-[#DCE9E2]">
+                  <h3 className="font-serif font-bold text-lg text-[#F0EBDD]">{weather.location.city}</h3>
+                  <span className="text-xs text-[#A5AA96]">
                     {weather.location.state ? `${weather.location.state}, ` : ""}
                     {weather.location.country}
                   </span>
                 </div>
                 <button
                   onClick={() => refetch()}
-                  className={`p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer ${
-                    isFetching ? "animate-spin" : ""
+                  className={`p-1.5 rounded-lg text-[#A5AA96] hover:text-[#F0EBDD] hover:bg-[#101B16] transition-colors cursor-pointer ${
+                    isFetching ? "animate-spin text-[#B69A62]" : ""
                   }`}
                   title="Refresh weather data"
                 >
@@ -227,38 +227,40 @@ export const WeatherPage = () => {
 
               <div className="py-6 flex items-baseline justify-between">
                 <div>
-                  <span className="text-5xl font-black tracking-tight">{weather.current.temperature}°C</span>
-                  <span className="text-xs text-[#DCE9E2] block mt-1">
+                  <span className="text-5xl font-serif font-bold tracking-tight text-[#F0EBDD]">
+                    {weather.current.temperature}°C
+                  </span>
+                  <span className="text-xs text-[#D9CEB5] block mt-1.5 font-medium">
                     Feels like {weather.current.apparentTemperature}°C • {weather.current.weatherDescription}
                   </span>
                 </div>
                 <div className="text-right">
-                  <CloudSun className="w-12 h-12 text-[#C7E7C7] ml-auto" />
+                  <CloudSun className="w-12 h-12 text-[#B69A62] ml-auto drop-shadow" />
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-2 pt-4 border-t border-white/10 text-xs">
-                <div className="p-2.5 rounded-lg bg-white/10 flex items-center gap-2">
-                  <Droplets className="w-4 h-4 text-[#C7E7C7]" />
+              <div className="grid grid-cols-3 gap-2.5 pt-4 border-t border-[#2D3B30] text-xs">
+                <div className="p-2.5 rounded-xl bg-[#101B16]/70 border border-[#2D3B30] flex items-center gap-2">
+                  <Droplets className="w-4 h-4 text-[#71805A]" />
                   <div>
-                    <span className="text-[10px] text-[#DCE9E2] block">Humidity</span>
-                    <span className="font-bold">{weather.current.humidity}%</span>
+                    <span className="text-[10px] text-[#A5AA96] block">Humidity</span>
+                    <span className="font-bold text-[#F0EBDD]">{weather.current.humidity}%</span>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-white/10 flex items-center gap-2">
-                  <Wind className="w-4 h-4 text-[#C7E7C7]" />
+                <div className="p-2.5 rounded-xl bg-[#101B16]/70 border border-[#2D3B30] flex items-center gap-2">
+                  <Wind className="w-4 h-4 text-[#B69A62]" />
                   <div>
-                    <span className="text-[10px] text-[#DCE9E2] block">Wind</span>
-                    <span className="font-bold">{weather.current.windSpeed} km/h</span>
+                    <span className="text-[10px] text-[#A5AA96] block">Wind</span>
+                    <span className="font-bold text-[#F0EBDD]">{weather.current.windSpeed} km/h</span>
                   </div>
                 </div>
 
-                <div className="p-2.5 rounded-lg bg-white/10 flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-[#C7E7C7]" />
+                <div className="p-2.5 rounded-xl bg-[#101B16]/70 border border-[#2D3B30] flex items-center gap-2">
+                  <Compass className="w-4 h-4 text-[#A4D5A4]" />
                   <div>
-                    <span className="text-[10px] text-[#DCE9E2] block">Precipitation</span>
-                    <span className="font-bold">{weather.current.precipitation} mm</span>
+                    <span className="text-[10px] text-[#A5AA96] block">Rain Vol</span>
+                    <span className="font-bold text-[#F0EBDD]">{weather.current.precipitation} mm</span>
                   </div>
                 </div>
               </div>
@@ -266,10 +268,10 @@ export const WeatherPage = () => {
 
             {/* Field Planning Context */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="border-l-2 border-l-[#174C35] flex flex-col justify-between">
+              <Card className="border-l-2 border-l-[#294C36] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
+                    <span className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider">
                       Foliage Spray Window
                     </span>
                     <Badge
@@ -284,39 +286,39 @@ export const WeatherPage = () => {
                       {weather.agriAdvisory.sprayingCondition}
                     </Badge>
                   </div>
-                  <p className="text-xs text-[#202820] leading-relaxed">
+                  <p className="text-xs text-[#A5AA96] leading-relaxed">
                     {weather.agriAdvisory.sprayingReason}
                   </p>
                 </div>
-                <span className="text-[10px] text-[#788579] mt-3 block">
-                  Evaluates wind drift (&lt;15 km/h) & imminent rain
+                <span className="text-[10px] text-[#A5AA96]/80 mt-3 block font-mono">
+                  Drift limit: &lt;15 km/h &amp; dry canopy
                 </span>
               </Card>
 
-              <Card className="border-l-2 border-l-[#1D4ED8] flex flex-col justify-between">
+              <Card className="border-l-2 border-l-[#2563EB] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-                      Irrigation Scheduling
+                    <span className="text-xs font-serif font-bold text-[#93C5FD] uppercase tracking-wider">
+                      Irrigation Protocol
                     </span>
                     <Badge variant="info">
                       {weather.agriAdvisory.irrigationNeed}
                     </Badge>
                   </div>
-                  <p className="text-xs text-[#202820] leading-relaxed">
+                  <p className="text-xs text-[#A5AA96] leading-relaxed">
                     {weather.agriAdvisory.irrigationReason}
                   </p>
                 </div>
-                <span className="text-[10px] text-[#788579] mt-3 block">
-                  Prevents water runoff and pump power waste
+                <span className="text-[10px] text-[#A5AA96]/80 mt-3 block font-mono">
+                  Conserves groundwater and energy cost
                 </span>
               </Card>
 
-              <Card className="border-l-2 border-l-[#8B6548] flex flex-col justify-between">
+              <Card className="border-l-2 border-l-[#79563C] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-                      Harvest Safety
+                    <span className="text-xs font-serif font-bold text-[#D5BEA8] uppercase tracking-wider">
+                      Harvest Feasibility
                     </span>
                     <Badge
                       variant={weather.agriAdvisory.harvestSafety === "Safe" ? "success" : "warning"}
@@ -324,19 +326,19 @@ export const WeatherPage = () => {
                       {weather.agriAdvisory.harvestSafety}
                     </Badge>
                   </div>
-                  <p className="text-xs text-[#202820] leading-relaxed">
+                  <p className="text-xs text-[#A5AA96] leading-relaxed">
                     {weather.agriAdvisory.harvestSafety === "Safe"
-                      ? "No heavy rain forecast. Favorable conditions for reaping and sun-drying grain."
-                      : "Rain expected within 48-72 hours. Ensure harvested produce is stored under cover."}
+                      ? "Zero severe precipitation anticipated. Optimal timing for reaping and sun-curing grains."
+                      : "Rainfall expected within 48-72 hours. Protect cut produce under tarpaulins."}
                   </p>
                 </div>
               </Card>
 
-              <Card className="border-l-2 border-l-[#65A765] flex flex-col justify-between">
+              <Card className="border-l-2 border-l-[#71805A] flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-                      Crop Stress Index
+                    <span className="text-xs font-serif font-bold text-[#A4D5A4] uppercase tracking-wider">
+                      Thermal Stress Index
                     </span>
                     <Badge
                       variant={weather.agriAdvisory.cropStressIndex === "Low" ? "success" : "warning"}
@@ -344,8 +346,8 @@ export const WeatherPage = () => {
                       {weather.agriAdvisory.cropStressIndex}
                     </Badge>
                   </div>
-                  <p className="text-xs text-[#202820] leading-relaxed">
-                    Thermal and moisture comfort level for standard cereal and cash crops in this district.
+                  <p className="text-xs text-[#A5AA96] leading-relaxed">
+                    Thermal and vapor pressure comfort zone calculated for regional field and plantation crops.
                   </p>
                 </div>
               </Card>
@@ -354,23 +356,23 @@ export const WeatherPage = () => {
 
           {/* 7-Day Forecast Cards */}
           <div>
-            <h3 className="text-xs font-semibold text-[#788579] uppercase tracking-wider mb-3">
-              7-Day Meteorological Forecast
+            <h3 className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider mb-3">
+              7-Day Synoptic Forecast
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
               {weather.forecast.map((day) => (
-                <Card key={day.date} className="text-center p-3">
-                  <span className="text-xs font-semibold text-[#202820] block">{day.dayName}</span>
-                  <span className="text-[10px] text-[#788579] block mb-2">{day.date.slice(5)}</span>
+                <Card key={day.date} className="text-center p-3.5 bg-[#18251D] border border-[#2D3B30] hover:border-[#B69A62]/40">
+                  <span className="text-xs font-serif font-bold text-[#F0EBDD] block">{day.dayName}</span>
+                  <span className="text-[10px] text-[#A5AA96] block mb-2 font-mono">{day.date.slice(5)}</span>
 
-                  <CloudSun className="w-6 h-6 mx-auto text-[#174C35] my-1" />
+                  <CloudSun className="w-6 h-6 mx-auto text-[#B69A62] my-1" />
 
-                  <div className="text-sm font-bold text-[#202820] mt-2">
-                    {day.tempMax}° / <span className="text-[#788579] text-xs font-normal">{day.tempMin}°</span>
+                  <div className="text-sm font-bold text-[#F0EBDD] mt-2 font-mono">
+                    {day.tempMax}° / <span className="text-[#A5AA96] text-xs font-normal">{day.tempMin}°</span>
                   </div>
 
-                  <div className="mt-2 text-[10px] text-[#1D4ED8] font-medium flex items-center justify-center gap-1">
-                    <Droplets className="w-3 h-3" />
+                  <div className="mt-2 text-[10px] text-[#A4D5A4] font-medium flex items-center justify-center gap-1 font-mono">
+                    <Droplets className="w-3 h-3 text-[#71805A]" />
                     {day.precipitationSum} mm
                   </div>
                 </Card>
@@ -381,29 +383,37 @@ export const WeatherPage = () => {
           {/* Analytics Charts */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <Card>
-              <h3 className="text-xs font-semibold text-[#788579] uppercase tracking-wider mb-4">
-                7-Day Temperature Range (°C)
+              <h3 className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider mb-4">
+                7-Day Temperature Fluctuation Curve (°C)
               </h3>
               <div className="h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={chartData}>
                     <defs>
-                      <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#174C35" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#174C35" stopOpacity={0} />
+                      <linearGradient id="tempGradientDark" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#B69A62" stopOpacity={0.25} />
+                        <stop offset="95%" stopColor="#B69A62" stopOpacity={0} />
                       </linearGradient>
                     </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E8DD" />
-                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#788579' }} />
-                    <YAxis unit="°" tick={{ fontSize: 11, fill: '#788579' }} domain={["dataMin - 2", "dataMax + 2"]} />
-                    <Tooltip />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#2D3B30" />
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#A5AA96' }} stroke="#2D3B30" />
+                    <YAxis unit="°" tick={{ fontSize: 11, fill: '#A5AA96' }} stroke="#2D3B30" domain={["dataMin - 2", "dataMax + 2"]} />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#18251D",
+                        borderColor: "#2D3B30",
+                        borderRadius: "0.75rem",
+                        color: "#F0EBDD",
+                        fontSize: "12px"
+                      }}
+                    />
                     <Area
                       type="monotone"
                       dataKey="maxTemp"
-                      stroke="#174C35"
+                      stroke="#B69A62"
                       strokeWidth={2}
                       fillOpacity={1}
-                      fill="url(#tempGradient)"
+                      fill="url(#tempGradientDark)"
                       name="Max Temp (°C)"
                     />
                   </AreaChart>
@@ -412,17 +422,25 @@ export const WeatherPage = () => {
             </Card>
 
             <Card>
-              <h3 className="text-xs font-semibold text-[#788579] uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider mb-4">
                 Forecasted Precipitation Volume (mm)
               </h3>
               <div className="h-56">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E8DD" />
-                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#788579' }} />
-                    <YAxis unit="mm" tick={{ fontSize: 11, fill: '#788579' }} />
-                    <Tooltip />
-                    <Bar dataKey="rain" fill="#65A765" radius={[4, 4, 0, 0]} name="Rainfall (mm)" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#2D3B30" />
+                    <XAxis dataKey="name" tick={{ fontSize: 11, fill: '#A5AA96' }} stroke="#2D3B30" />
+                    <YAxis unit="mm" tick={{ fontSize: 11, fill: '#A5AA96' }} stroke="#2D3B30" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "#18251D",
+                        borderColor: "#2D3B30",
+                        borderRadius: "0.75rem",
+                        color: "#F0EBDD",
+                        fontSize: "12px"
+                      }}
+                    />
+                    <Bar dataKey="rain" fill="#71805A" radius={[4, 4, 0, 0]} name="Rainfall (mm)" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

@@ -11,7 +11,10 @@ import {
   Droplets,
   Wind,
   MapPin,
-  Sprout
+  Sprout,
+  Compass,
+  Sparkles,
+  ArrowRight
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useFarm } from "../context/FarmContext";
@@ -122,42 +125,57 @@ export const DashboardPage = () => {
   });
 
   return (
-    <div className="space-y-6">
-      {/* Welcome Banner: Clean Deep Forest Green SaaS Card */}
-      <div className="p-6 sm:p-8 rounded-xl bg-[#174C35] text-white border border-[#123D2A] shadow-card relative overflow-hidden">
+    <div className="space-y-7">
+      {/* Editorial Botanical Hero Banner */}
+      <div className="p-6 sm:p-9 rounded-2xl bg-gradient-to-br from-[#18251D] via-[#202B22] to-[#121E17] text-[#F0EBDD] border border-[#B69A62]/35 shadow-card relative overflow-hidden">
+        {/* Subtle decorative background watermarks */}
+        <div className="absolute -right-12 -bottom-16 w-80 h-80 opacity-5 pointer-events-none select-none">
+          <svg viewBox="0 0 200 200" fill="currentColor">
+            <path d="M100 0 C120 40 180 80 180 120 C180 160 140 190 100 200 C60 190 20 160 20 120 C20 80 80 40 100 0 Z" />
+          </svg>
+        </div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-radial from-[#71805A]/15 to-transparent pointer-events-none" />
+
         <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/10 border border-white/15 text-white text-[11px] font-semibold mb-3 tracking-wide">
-            <Sprout className="w-3.5 h-3.5 text-[#C7E7C7]" />
-            <span>Agricultural Intelligence Platform</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#101B16]/80 border border-[#B69A62]/30 text-[#D4BE8D] text-[11px] font-medium mb-4 tracking-wide shadow-subtle">
+            <Compass className="w-3.5 h-3.5 text-[#B69A62]" />
+            <span className="font-serif italic">Agricultural Research & Field Intelligence Journal</span>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+          <h1 className="text-3xl sm:text-4xl font-serif font-bold tracking-tight text-[#F0EBDD]">
             Namaste, {user?.name || "Farmer"}
           </h1>
 
-          <p className="mt-2 text-sm text-[#DCE9E2] leading-relaxed">
-            {selectedFarm
-              ? `Active Farm: ${selectedFarm.name} (${selectedFarm.area} ${selectedFarm.areaUnit}, ${selectedFarm.district}, ${selectedFarm.state} • ${selectedFarm.soilType} soil). Ready for crop analytics and advisory.`
-              : "No farm profile selected. Select an existing plot or register a new one to enable targeted agronomic recommendations."}
+          <p className="mt-2.5 text-sm text-[#A5AA96] leading-relaxed">
+            {selectedFarm ? (
+              <span>
+                Active Cultivation Plot: <strong className="text-[#D9CEB5]">{selectedFarm.name}</strong>{" "}
+                ({selectedFarm.area} {selectedFarm.areaUnit}, {selectedFarm.district}, {selectedFarm.state} •{" "}
+                <span className="text-[#D4BE8D]">{selectedFarm.soilType} Soil</span>). Calibrated for real-time agronomic analytics.
+              </span>
+            ) : (
+              "No specific farm plot selected. Select an existing plot from the registry or initialize a new survey to unlock tailored soil intelligence."
+            )}
           </p>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <Link to="/crop-recommendation">
               <Button
                 size="sm"
-                className="bg-white text-[#174C35] hover:bg-[#F0F6F3] font-semibold shadow-xs"
-                icon={<Wheat className="w-4 h-4 text-[#174C35]" />}
+                className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40 shadow-subtle hover:shadow-gold-glow"
+                icon={<Wheat className="w-4 h-4 text-[#D4BE8D]" />}
               >
                 Run Crop Intelligence
               </Button>
             </Link>
             <Link to="/disease-detection">
               <Button
+                variant="outline"
                 size="sm"
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold shadow-xs"
-                icon={<ScanLine className="w-4 h-4 text-[#C7E7C7]" />}
+                className="border-[#B69A62]/35 text-[#D9CEB5] hover:bg-[#18251D] hover:text-[#F0EBDD] hover:border-[#B69A62]"
+                icon={<ScanLine className="w-4 h-4 text-[#A4D5A4]" />}
               >
-                Scan Leaf Disease
+                Scan Leaf Pathology
               </Button>
             </Link>
           </div>
@@ -166,71 +184,71 @@ export const DashboardPage = () => {
 
       {/* 4 Stats Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card hoverable className="border-t-2 border-t-[#174C35]">
+        <Card hoverable className="border-t-2 border-t-[#B69A62]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-              My Farms
+            <span className="text-[11px] font-semibold text-[#A5AA96] uppercase tracking-wider">
+              Registered Plots
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#F0F6F3] text-[#174C35] border border-[#DCE9E2] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#18251D] text-[#D4BE8D] border border-[#B69A62]/25 flex items-center justify-center">
               <Tractor className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-[#202820] tracking-tight">
+            <span className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
               {isLoadingStats ? "..." : statsData?.totalFarms ?? farms.length}
             </span>
-            <span className="text-xs text-[#788579] block mt-0.5">Registered plots</span>
+            <span className="text-xs text-[#A5AA96] block mt-0.5">Active field parcels</span>
           </div>
         </Card>
 
-        <Card hoverable className="border-t-2 border-t-[#65A765]">
+        <Card hoverable className="border-t-2 border-t-[#71805A]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-              Crop AI Runs
+            <span className="text-[11px] font-semibold text-[#A5AA96] uppercase tracking-wider">
+              Crop AI Inferences
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#F3FAF3] text-[#65A765] border border-[#E4F4E4] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#18251D] text-[#A4D5A4] border border-[#71805A]/40 flex items-center justify-center">
               <Wheat className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-[#202820] tracking-tight">
+            <span className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
               {isLoadingStats ? "..." : statsData?.totalCropRecommendations ?? 0}
             </span>
-            <span className="text-xs text-[#788579] block mt-0.5">Recommendations saved</span>
+            <span className="text-xs text-[#A5AA96] block mt-0.5">Recommendations cataloged</span>
           </div>
         </Card>
 
-        <Card hoverable className="border-t-2 border-t-[#8B6548]">
+        <Card hoverable className="border-t-2 border-t-[#79563C]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
+            <span className="text-[11px] font-semibold text-[#A5AA96] uppercase tracking-wider">
               Disease Scans
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#FAF6F2] text-[#8B6548] border border-[#E6D7C8] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#18251D] text-[#D5BEA8] border border-[#79563C]/40 flex items-center justify-center">
               <ScanLine className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-[#202820] tracking-tight">
+            <span className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
               {isLoadingStats ? "..." : statsData?.totalDiseaseScans ?? 0}
             </span>
-            <span className="text-xs text-[#788579] block mt-0.5">Foliage photos evaluated</span>
+            <span className="text-xs text-[#A5AA96] block mt-0.5">Leaf specimens inspected</span>
           </div>
         </Card>
 
-        <Card hoverable className="border-t-2 border-t-[#174C35]">
+        <Card hoverable className="border-t-2 border-t-[#294C36]">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-[#788579] uppercase tracking-wider">
-              Crop Health
+            <span className="text-[11px] font-semibold text-[#A5AA96] uppercase tracking-wider">
+              Foliage Health
             </span>
-            <div className="w-8 h-8 rounded-lg bg-[#F0F6F3] text-[#174C35] border border-[#DCE9E2] flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-[#18251D] text-[#D4BE8D] border border-[#B69A62]/25 flex items-center justify-center">
               <Shield className="w-4 h-4" />
             </div>
           </div>
           <div className="mt-3">
-            <span className="text-2xl font-bold text-[#202820] tracking-tight">
+            <span className="text-2xl font-serif font-bold text-[#A4D5A4] tracking-tight">
               {isLoadingStats ? "..." : `${statsData?.healthyCropPercentage ?? 100}%`}
             </span>
-            <span className="text-xs text-[#788579] block mt-0.5">Healthy foliage ratio</span>
+            <span className="text-xs text-[#A5AA96] block mt-0.5">Optimal health ratio</span>
           </div>
         </Card>
       </div>
@@ -240,10 +258,10 @@ export const DashboardPage = () => {
         {/* Weather Card */}
         <Card className="lg:col-span-1 flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-3 border-b border-[#E5E8DD] mb-4">
+            <div className="flex items-center justify-between pb-3.5 border-b border-[#2D3B30] mb-4">
               <div className="flex items-center gap-2">
-                <CloudSun className="w-4.5 h-4.5 text-[#174C35]" />
-                <h3 className="text-sm font-semibold text-[#202820]">Field Weather & Advisory</h3>
+                <CloudSun className="w-4.5 h-4.5 text-[#B69A62]" />
+                <h3 className="text-sm font-serif font-bold text-[#F0EBDD]">Meteorological Station</h3>
               </div>
               <div className="flex items-center gap-2">
                 <button
@@ -251,12 +269,12 @@ export const DashboardPage = () => {
                   onClick={detectLocation}
                   disabled={isLocating}
                   title="Detect GPS location"
-                  className="p-1 rounded text-[#788579] hover:text-[#174C35] hover:bg-[#F0F6F3] transition-colors cursor-pointer"
+                  className="p-1 rounded text-[#A5AA96] hover:text-[#D4BE8D] hover:bg-[#18251D] transition-colors cursor-pointer"
                 >
-                  <MapPin className={`w-3.5 h-3.5 ${isLocating ? "animate-bounce text-[#174C35]" : ""}`} />
+                  <MapPin className={`w-3.5 h-3.5 ${isLocating ? "animate-bounce text-[#B69A62]" : ""}`} />
                 </button>
-                <Link to="/weather" className="text-xs text-[#174C35] font-semibold hover:underline">
-                  7-Day Forecast
+                <Link to="/weather" className="text-xs text-[#D4BE8D] font-medium hover:underline flex items-center gap-1">
+                  7-Day Outlook <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
             </div>
@@ -267,11 +285,11 @@ export const DashboardPage = () => {
               <div>
                 <div className="flex items-baseline justify-between mb-4">
                   <div>
-                    <span className="text-3xl font-bold text-[#202820] tracking-tight">
+                    <span className="text-3xl font-serif font-bold text-[#F0EBDD] tracking-tight">
                       {weatherData.current.temperature}°C
                     </span>
                     <div className="flex items-center gap-1.5 mt-1">
-                      <span className="text-xs text-[#788579]">
+                      <span className="text-xs text-[#A5AA96]">
                         {weatherData.current.weatherDescription} • {weatherData.location.city}
                         {weatherData.location.state &&
                         weatherData.location.state !== weatherData.location.city
@@ -279,11 +297,11 @@ export const DashboardPage = () => {
                           : ""}
                       </span>
                       {gpsCoords ? (
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#174C35] bg-[#F0F6F3] border border-[#DCE9E2] px-1.5 py-0.5 rounded">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#D4BE8D] bg-[#18251D] border border-[#B69A62]/30 px-1.5 py-0.5 rounded">
                           GPS
                         </span>
                       ) : selectedFarm ? (
-                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#174C35] bg-[#F0F6F3] border border-[#DCE9E2] px-1.5 py-0.5 rounded">
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-[#D4BE8D] bg-[#18251D] border border-[#B69A62]/30 px-1.5 py-0.5 rounded">
                           Farm
                         </span>
                       ) : null}
@@ -303,66 +321,66 @@ export const DashboardPage = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs mb-4">
-                  <div className="p-2.5 rounded-lg bg-[#F7F8F2] border border-[#E5E8DD] flex items-center gap-2">
-                    <Droplets className="w-4 h-4 text-[#174C35]" />
+                  <div className="p-2.5 rounded-xl bg-[#18251D] border border-[#2D3B30] flex items-center gap-2.5">
+                    <Droplets className="w-4 h-4 text-[#71805A]" />
                     <div>
-                      <span className="text-[#788579] block text-[10px]">Humidity</span>
-                      <span className="font-semibold text-[#202820]">
+                      <span className="text-[#A5AA96] block text-[10px]">Relative Humidity</span>
+                      <span className="font-semibold text-[#F0EBDD]">
                         {weatherData.current.humidity}%
                       </span>
                     </div>
                   </div>
-                  <div className="p-2.5 rounded-lg bg-[#F7F8F2] border border-[#E5E8DD] flex items-center gap-2">
-                    <Wind className="w-4 h-4 text-[#788579]" />
+                  <div className="p-2.5 rounded-xl bg-[#18251D] border border-[#2D3B30] flex items-center gap-2.5">
+                    <Wind className="w-4 h-4 text-[#B69A62]" />
                     <div>
-                      <span className="text-[#788579] block text-[10px]">Wind Speed</span>
-                      <span className="font-semibold text-[#202820]">
+                      <span className="text-[#A5AA96] block text-[10px]">Wind Velocity</span>
+                      <span className="font-semibold text-[#F0EBDD]">
                         {weatherData.current.windSpeed} km/h
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-[#F0F6F3] border border-[#DCE9E2] text-xs text-[#174C35]">
-                  <span className="font-semibold block mb-0.5 flex items-center gap-1.5">
-                    <Sprout className="w-3.5 h-3.5" />
-                    Irrigation Guidance:
+                <div className="p-3 rounded-xl bg-[#18251D] border border-[#2D3B30] text-xs">
+                  <span className="font-semibold text-[#D4BE8D] block mb-0.5 flex items-center gap-1.5">
+                    <Sprout className="w-3.5 h-3.5 text-[#A4D5A4]" />
+                    Irrigation Advisory:
                   </span>
-                  <p className="leading-relaxed text-[#202820]">{weatherData.agriAdvisory.irrigationReason}</p>
+                  <p className="leading-relaxed text-[#A5AA96]">{weatherData.agriAdvisory.irrigationReason}</p>
                 </div>
               </div>
             ) : (
-              <p className="text-xs text-[#788579]">Weather data currently updating.</p>
+              <p className="text-xs text-[#A5AA96]">Weather telemetry currently updating...</p>
             )}
           </div>
         </Card>
 
         {/* Mandi Prices Snapshot */}
         <Card className="lg:col-span-2">
-          <div className="flex items-center justify-between pb-3 border-b border-[#E5E8DD] mb-4">
+          <div className="flex items-center justify-between pb-3.5 border-b border-[#2D3B30] mb-4">
             <div className="flex items-center gap-2">
-              <Store className="w-4.5 h-4.5 text-[#174C35]" />
-              <h3 className="text-sm font-semibold text-[#202820]">APMC Mandi Price Snapshot</h3>
+              <Store className="w-4.5 h-4.5 text-[#B69A62]" />
+              <h3 className="text-sm font-serif font-bold text-[#F0EBDD]">APMC Mandi Quotations</h3>
             </div>
-            <Link to="/mandi-prices" className="text-xs text-[#174C35] font-semibold hover:underline">
-              Explore All Mandis →
+            <Link to="/mandi-prices" className="text-xs text-[#D4BE8D] font-medium hover:underline flex items-center gap-1">
+              Explore All Mandis <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
-          <div className="divide-y divide-[#E5E8DD]">
+          <div className="divide-y divide-[#2D3B30]">
             {mandiPrices.map((m) => (
               <div key={m.id} className="py-2.5 flex items-center justify-between text-xs">
                 <div>
-                  <span className="font-semibold text-[#202820] text-sm">{m.commodity}</span>
-                  <span className="text-[#788579] block text-[11px] mt-0.5">
-                    {m.market} ({m.state}) • {m.variety}
+                  <span className="font-serif font-bold text-[#F0EBDD] text-sm">{m.commodity}</span>
+                  <span className="text-[#A5AA96] block text-[11px] mt-0.5">
+                    {m.market} ({m.state}) • <span className="text-[#D9CEB5]">{m.variety}</span>
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="font-bold text-[#174C35] text-sm">
+                  <span className="font-mono font-bold text-[#D4BE8D] text-sm">
                     ₹{m.modalPrice.toLocaleString()}
                   </span>
-                  <span className="text-[10px] text-[#788579] block">per Quintal</span>
+                  <span className="text-[10px] text-[#A5AA96] block">per Quintal</span>
                 </div>
               </div>
             ))}
@@ -372,27 +390,27 @@ export const DashboardPage = () => {
 
       {/* Bottom Grid: Recent Activity Feed */}
       <Card>
-        <div className="flex items-center justify-between pb-3 border-b border-[#E5E8DD] mb-4">
-          <h3 className="text-sm font-semibold text-[#202820]">Recent Activity & Analytics</h3>
-          <Link to="/history" className="text-xs text-[#174C35] font-semibold hover:underline">
-            View Full History
+        <div className="flex items-center justify-between pb-3.5 border-b border-[#2D3B30] mb-4">
+          <h3 className="text-sm font-serif font-bold text-[#F0EBDD]">Field Log & Historical Audits</h3>
+          <Link to="/history" className="text-xs text-[#D4BE8D] font-medium hover:underline flex items-center gap-1">
+            View Complete Log <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
         {recentActivity.length === 0 ? (
-          <div className="text-center py-8 text-xs text-[#788579]">
-            No activity records found. Run a crop recommendation or leaf scan to begin.
+          <div className="text-center py-8 text-xs text-[#A5AA96]">
+            No records logged. Execute a crop recommendation or leaf diagnosis to populate the journal.
           </div>
         ) : (
-          <div className="divide-y divide-[#E5E8DD]">
+          <div className="divide-y divide-[#2D3B30]">
             {recentActivity.map((act) => (
               <div key={act.id} className="py-3 flex items-center justify-between text-xs">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`p-2 rounded-lg flex-shrink-0 border ${
+                    className={`p-2 rounded-xl flex-shrink-0 border ${
                       act.type === "crop_recommendation"
-                        ? "bg-[#F0F6F3] text-[#174C35] border-[#DCE9E2]"
-                        : "bg-[#FAF6F2] text-[#8B6548] border-[#E6D7C8]"
+                        ? "bg-[#294C36]/40 text-[#A4D5A4] border-[#294C36]"
+                        : "bg-[#79563C]/35 text-[#D5BEA8] border-[#79563C]/60"
                     }`}
                   >
                     {act.type === "crop_recommendation" ? (
@@ -402,15 +420,15 @@ export const DashboardPage = () => {
                     )}
                   </div>
                   <div>
-                    <p className="font-semibold text-[#202820] text-sm">{act.title}</p>
-                    <p className="text-[#788579] text-[11px] truncate max-w-md mt-0.5">
+                    <p className="font-serif font-bold text-[#F0EBDD] text-sm">{act.title}</p>
+                    <p className="text-[#A5AA96] text-[11px] truncate max-w-md mt-0.5">
                       {act.summary}
                     </p>
                   </div>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <span className="font-bold text-[#202820]">{Math.round(act.confidence * 100)}%</span>
-                  <span className="text-[10px] text-[#788579] block">
+                  <span className="font-mono font-bold text-[#D4BE8D]">{Math.round(act.confidence * 100)}%</span>
+                  <span className="text-[10px] text-[#A5AA96] block font-mono">
                     {new Date(act.createdAt).toLocaleDateString("en-IN", {
                       month: "short",
                       day: "numeric"

@@ -40,42 +40,45 @@ export const Sidebar = ({ isOpen, onClose }) => {
       {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 z-40 bg-[#202820]/40 backdrop-blur-xs lg:hidden"
+          className="fixed inset-0 z-40 bg-[#0B120E]/80 backdrop-blur-sm lg:hidden"
           onClick={onClose}
         />
       )}
 
       <aside
         className={clsx(
-          "fixed top-0 bottom-0 left-0 z-40 w-64 bg-white border-r border-[#E5E8DD] flex flex-col shadow-subtle transition-transform duration-200 ease-in-out lg:translate-x-0",
+          "fixed top-0 bottom-0 left-0 z-40 w-64 bg-[#18251D] border-r border-[#2D3B30] flex flex-col shadow-elevated transition-transform duration-200 ease-in-out lg:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
         {/* Logo Header */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-[#E5E8DD]">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-[#2D3B30] bg-[#101B16]/50">
           <NavLink to="/dashboard" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-[#174C35] flex items-center justify-center text-white shadow-xs transition-transform group-hover:scale-105">
+            <div className="w-8 h-8 rounded-lg bg-[#294C36] border border-[#B69A62]/40 flex items-center justify-center text-[#D4BE8D] shadow-subtle transition-transform group-hover:scale-105">
               <Sprout className="w-4.5 h-4.5" />
             </div>
             <div>
-              <span className="text-base font-bold text-[#202820] flex items-center gap-1.5 leading-none tracking-tight">
-                AgroAI <span className="text-[#174C35] text-[10px] px-1.5 py-0.5 rounded bg-[#F0F6F3] border border-[#DCE9E2] uppercase font-bold tracking-wider">SaaS</span>
+              <span className="text-lg font-serif font-bold text-[#F0EBDD] flex items-center gap-1.5 leading-none tracking-tight">
+                AgroAI{" "}
+                <span className="text-[10px] px-1.5 py-0.5 rounded font-sans font-semibold uppercase tracking-wider bg-[#B69A62]/15 text-[#D4BE8D] border border-[#B69A62]/35">
+                  Pro
+                </span>
               </span>
-              <span className="text-[10px] text-[#788579] block font-medium mt-0.5 tracking-tight">
-                Agricultural Decision Platform
+              <span className="text-[10px] text-[#A5AA96] block font-medium mt-0.5 tracking-tight font-sans">
+                Agricultural Intelligence
               </span>
             </div>
           </NavLink>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#788579] hover:bg-[#F0F6F3] hover:text-[#174C35] lg:hidden cursor-pointer"
+            className="p-1.5 rounded-lg text-[#A5AA96] hover:bg-[#202B22] hover:text-[#F0EBDD] lg:hidden cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Navigation items */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             return (
@@ -85,10 +88,10 @@ export const Sidebar = ({ isOpen, onClose }) => {
                 onClick={() => onClose()}
                 className={({ isActive }) =>
                   clsx(
-                    "flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors duration-150",
+                    "flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all duration-150",
                     isActive
-                      ? "bg-[#174C35] text-white shadow-xs font-semibold"
-                      : "text-[#788579] hover:bg-[#F0F6F3] hover:text-[#174C35]"
+                      ? "bg-[#202B22] text-[#F0EBDD] font-semibold border border-[#B69A62]/30 shadow-subtle border-l-2 border-l-[#B69A62]"
+                      : "text-[#A5AA96] hover:bg-[#202B22]/60 hover:text-[#F0EBDD]"
                   )
                 }
               >
@@ -97,7 +100,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
                   <span>{item.label}</span>
                 </div>
                 {item.tag && (
-                  <span className="text-[9px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider bg-[#F0F6F3] text-[#174C35] border border-[#DCE9E2]">
+                  <span className="text-[9px] px-1.5 py-0.5 rounded font-semibold uppercase tracking-wider bg-[#294C36]/50 text-[#A4D5A4] border border-[#294C36]">
                     {item.tag}
                   </span>
                 )}
@@ -107,15 +110,15 @@ export const Sidebar = ({ isOpen, onClose }) => {
         </nav>
 
         {/* User Card & Logout */}
-        <div className="p-3 border-t border-[#E5E8DD] bg-[#F7F8F2]">
-          <div className="flex items-center justify-between p-2 rounded-lg bg-white border border-[#E5E8DD]">
+        <div className="p-3 border-t border-[#2D3B30] bg-[#101B16]/70">
+          <div className="flex items-center justify-between p-2.5 rounded-xl bg-[#202B22] border border-[#2D3B30]">
             <div className="flex items-center gap-2.5 min-w-0">
-              <div className="w-7 h-7 rounded-full bg-[#174C35] text-white flex items-center justify-center font-bold text-xs flex-shrink-0 uppercase">
+              <div className="w-7 h-7 rounded-full bg-[#294C36] text-[#D4BE8D] border border-[#B69A62]/30 flex items-center justify-center font-bold text-xs flex-shrink-0 uppercase">
                 {user?.name ? user.name.charAt(0) : "F"}
               </div>
               <div className="min-w-0">
-                <p className="text-xs font-semibold text-[#202820] truncate">{user?.name}</p>
-                <p className="text-[10px] text-[#788579] capitalize font-medium">
+                <p className="text-xs font-semibold text-[#F0EBDD] truncate">{user?.name}</p>
+                <p className="text-[10px] text-[#A5AA96] capitalize font-medium">
                   {user?.role || "Farmer"}
                 </p>
               </div>
@@ -123,7 +126,7 @@ export const Sidebar = ({ isOpen, onClose }) => {
             <button
               onClick={() => logout()}
               title="Sign Out"
-              className="p-1.5 rounded-lg text-[#788579] hover:text-[#DC2626] hover:bg-red-50 transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg text-[#A5AA96] hover:text-rose-400 hover:bg-[#18251D] transition-colors cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
             </button>

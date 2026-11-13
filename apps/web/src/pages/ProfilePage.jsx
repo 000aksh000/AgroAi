@@ -91,35 +91,35 @@ export const ProfilePage = () => {
   return (
     <div className="space-y-6 max-w-4xl">
       {/* Header */}
-      <div className="pb-4 border-b border-[#E5E8DD]">
-        <h1 className="text-2xl font-black text-charcoal tracking-tight">Farmer Profile & Settings</h1>
-        <p className="text-xs text-muted mt-1 font-medium">
-          Manage your personal contact info, regional location, and security credentials.
+      <div className="pb-4 border-b border-[#2D3B30]">
+        <h1 className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">Agricultural Operator Profile</h1>
+        <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+          Manage personal contact credentials, regional district mapping, and security protocols.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
         {/* Left Column: Farmer ID Card */}
-        <Card className="text-center p-6 md:col-span-1">
-          <div className="w-20 h-20 rounded-full bg-forest-700 text-white font-bold text-2xl flex items-center justify-center mx-auto mb-4 uppercase shadow-subtle border-2 border-forest-600/30">
+        <Card className="text-center p-6 md:col-span-1 bg-gradient-to-br from-[#202B22] to-[#18251D]">
+          <div className="w-20 h-20 rounded-full bg-[#294C36] text-[#D4BE8D] font-serif font-bold text-2xl flex items-center justify-center mx-auto mb-4 uppercase shadow-card border-2 border-[#B69A62]/40">
             {user?.name ? user.name.charAt(0) : "F"}
           </div>
-          <h2 className="text-base font-bold text-charcoal">{user?.name}</h2>
-          <p className="text-xs text-muted truncate">{user?.email}</p>
+          <h2 className="text-base font-serif font-bold text-[#F0EBDD]">{user?.name}</h2>
+          <p className="text-xs text-[#A5AA96] truncate mt-0.5">{user?.email}</p>
           <div className="mt-3 flex justify-center">
-            <Badge variant="leaf" size="sm" className="capitalize">
+            <Badge variant="gold" size="sm" className="capitalize">
               {user?.role || "Farmer"} Account
             </Badge>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-[#E5E8DD] text-left text-xs space-y-2.5 text-charcoal">
+          <div className="mt-6 pt-6 border-t border-[#2D3B30] text-left text-xs space-y-2.5 text-[#D9CEB5]">
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-soil-500" />
+              <MapPin className="w-4 h-4 text-[#B69A62]" />
               <span>{user?.district ? `${user.district}, ` : ""}{user?.state || "India"}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-soil-500" />
-              <span className="text-muted">{user?.phone || "No phone added"}</span>
+              <Phone className="w-4 h-4 text-[#B69A62]" />
+              <span className="text-[#A5AA96]">{user?.phone || "No telephone linked"}</span>
             </div>
           </div>
 
@@ -127,7 +127,7 @@ export const ProfilePage = () => {
             variant="outline"
             size="sm"
             onClick={() => logout()}
-            className="w-full mt-6 text-rose-600 border-rose-200 hover:bg-rose-50 hover:border-rose-300"
+            className="w-full mt-6 text-rose-300 border-rose-900/50 hover:bg-[#18251D] hover:border-rose-700"
             icon={<LogOut className="w-4 h-4" />}
           >
             Sign Out
@@ -138,19 +138,19 @@ export const ProfilePage = () => {
         <div className="md:col-span-2 space-y-6">
           {/* Personal Information */}
           <Card>
-            <h3 className="text-sm font-bold text-charcoal uppercase tracking-wider mb-4">
-              Personal Information
+            <h3 className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider mb-4">
+              Operator Credentials
             </h3>
 
             {profileSuccess && (
-              <div className="mb-4 p-3 rounded-xl bg-forest-50 border border-forest-200 text-forest-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-forest-700 flex-shrink-0" />
-                <span>Profile updated successfully!</span>
+              <div className="mb-4 p-3 rounded-xl bg-[#294C36]/30 border border-[#294C36] text-[#A4D5A4] text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#A4D5A4] flex-shrink-0" />
+                <span>Operator profile synchronized successfully.</span>
               </div>
             )}
 
             {profileError && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-xl bg-[#8B2E2E]/25 border border-[#8B2E2E]/50 text-[#FCA5A5] text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{profileError}</span>
               </div>
@@ -164,23 +164,23 @@ export const ProfilePage = () => {
               className="space-y-4 text-xs"
             >
               <div>
-                <label className="block font-semibold text-charcoal mb-1">Full Name</label>
+                <label className="block font-serif font-bold text-[#D9CEB5] mb-1">Full Legal Name</label>
                 <input
                   type="text"
                   required
                   value={profileForm.name}
                   onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                  className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-charcoal mb-1">State</label>
+                  <label className="block font-serif font-bold text-[#D9CEB5] mb-1">State / Province</label>
                   <select
                     value={profileForm.state}
                     onChange={(e) => setProfileForm({ ...profileForm, state: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                    className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                   >
                     {INDIAN_STATES.map((s) => (
                       <option key={s} value={s}>
@@ -190,49 +190,54 @@ export const ProfilePage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block font-semibold text-charcoal mb-1">District</label>
+                  <label className="block font-serif font-bold text-[#D9CEB5] mb-1">Primary District</label>
                   <input
                     type="text"
                     value={profileForm.district}
                     onChange={(e) => setProfileForm({ ...profileForm, district: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                    className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block font-semibold text-charcoal mb-1">Mobile Number</label>
+                <label className="block font-serif font-bold text-[#D9CEB5] mb-1">Contact Telephone</label>
                 <input
                   type="tel"
                   placeholder="+91 98765 43210"
                   value={profileForm.phone}
                   onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                  className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                 />
               </div>
 
-              <Button type="submit" isLoading={updateProfileMutation.isPending} size="sm">
-                Save Profile Details
+              <Button
+                type="submit"
+                isLoading={updateProfileMutation.isPending}
+                size="sm"
+                className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40"
+              >
+                Save Profile Record
               </Button>
             </form>
           </Card>
 
           {/* Change Password */}
           <Card>
-            <h3 className="text-sm font-bold text-charcoal uppercase tracking-wider mb-4 flex items-center gap-2">
-              <Lock className="w-4 h-4 text-forest-700" />
-              Security & Password
+            <h3 className="text-xs font-serif font-bold text-[#D4BE8D] uppercase tracking-wider mb-4 flex items-center gap-2">
+              <Lock className="w-4 h-4 text-[#B69A62]" />
+              Cryptographic Security & Passcode
             </h3>
 
             {passwordSuccess && (
-              <div className="mb-4 p-3 rounded-xl bg-forest-50 border border-forest-200 text-forest-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-forest-700 flex-shrink-0" />
-                <span>Password updated successfully! Other sessions have been revoked.</span>
+              <div className="mb-4 p-3 rounded-xl bg-[#294C36]/30 border border-[#294C36] text-[#A4D5A4] text-xs flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-[#A4D5A4] flex-shrink-0" />
+                <span>Security passkey updated. Active sessions refreshed.</span>
               </div>
             )}
 
             {passwordError && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-xl bg-[#8B2E2E]/25 border border-[#8B2E2E]/50 text-[#FCA5A5] text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 flex-shrink-0" />
                 <span>{passwordError}</span>
               </div>
@@ -246,41 +251,46 @@ export const ProfilePage = () => {
               className="space-y-4 text-xs"
             >
               <div>
-                <label className="block font-semibold text-charcoal mb-1">Current Password</label>
+                <label className="block font-serif font-bold text-[#D9CEB5] mb-1">Current Passkey</label>
                 <input
                   type="password"
                   required
                   value={passwordForm.currentPassword}
                   onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                  className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block font-semibold text-charcoal mb-1">New Password</label>
+                  <label className="block font-serif font-bold text-[#D9CEB5] mb-1">New Passkey</label>
                   <input
                     type="password"
                     required
                     value={passwordForm.newPassword}
                     onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                    className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                   />
                 </div>
                 <div>
-                  <label className="block font-semibold text-charcoal mb-1">Confirm New Password</label>
+                  <label className="block font-serif font-bold text-[#D9CEB5] mb-1">Confirm New Passkey</label>
                   <input
                     type="password"
                     required
                     value={passwordForm.confirmPassword}
                     onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                    className="w-full px-3 py-2 rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                   />
                 </div>
               </div>
 
-              <Button type="submit" isLoading={changePasswordMutation.isPending} size="sm">
-                Change Password
+              <Button
+                type="submit"
+                isLoading={changePasswordMutation.isPending}
+                size="sm"
+                className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40"
+              >
+                Update Security Passkey
               </Button>
             </form>
           </Card>

@@ -12,21 +12,21 @@ export const Button = ({
   ...props
 }) => {
   const base =
-    "inline-flex items-center justify-center font-medium rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer tracking-tight";
+    "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#101B16] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer tracking-tight";
 
   const variants = {
     primary:
-      "bg-[#174C35] text-white hover:bg-[#123D2A] active:bg-[#0E2E1F] focus:ring-[#174C35]/40 shadow-xs",
+      "bg-[#294C36] text-[#F0EBDD] hover:bg-[#346045] active:bg-[#1F3A2A] border border-[#B69A62]/30 shadow-subtle hover:shadow-gold-glow focus:ring-[#B69A62]/40",
     secondary:
-      "bg-[#F0F6F3] text-[#174C35] border border-[#DCE9E2] hover:bg-[#E4F4E4] focus:ring-[#174C35]/30",
+      "bg-[#18251D] text-[#D9CEB5] border border-[#2D3B30] hover:bg-[#202B22] hover:border-[#B69A62]/30 focus:ring-[#71805A]/40",
     earth:
-      "bg-[#8B6548] text-white hover:bg-[#735239] active:bg-[#5A3F2C] focus:ring-[#8B6548]/40 shadow-xs",
+      "bg-[#79563C] text-[#F0EBDD] hover:bg-[#8E6749] active:bg-[#5C402B] border border-[#B69A62]/30 shadow-subtle focus:ring-[#B69A62]/40",
     outline:
-      "border border-[#DCE1D3] text-[#202820] bg-white hover:bg-[#F7F8F2] hover:border-[#CCD3C0] focus:ring-[#174C35]/30 shadow-2xs",
+      "border border-[#B69A62]/40 text-[#D9CEB5] bg-transparent hover:bg-[#18251D] hover:text-[#F0EBDD] hover:border-[#B69A62] focus:ring-[#B69A62]/30",
     danger:
-      "bg-[#DC2626] text-white hover:bg-[#B91C1C] active:bg-[#991B1B] focus:ring-red-500/40 shadow-xs",
+      "bg-[#8B2E2E] text-[#F0EBDD] hover:bg-[#A33535] active:bg-[#722323] border border-red-900/50 focus:ring-red-500/40 shadow-subtle",
     ghost:
-      "text-[#202820] hover:bg-[#F0F2EB] hover:text-[#174C35] focus:ring-[#174C35]/20"
+      "text-[#A5AA96] hover:bg-[#18251D] hover:text-[#F0EBDD] focus:ring-[#B69A62]/20"
   };
 
   const sizes = {

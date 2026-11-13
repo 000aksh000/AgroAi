@@ -99,43 +99,43 @@ export const MandiPricesPage = () => {
   };
 
   const getTrendIcon = (trend) => {
-    if (trend === "up") return <ArrowUpRight className="w-4 h-4 text-emerald-600 inline" />;
-    if (trend === "down") return <ArrowDownRight className="w-4 h-4 text-rose-600 inline" />;
-    return <Minus className="w-4 h-4 text-muted inline" />;
+    if (trend === "up") return <ArrowUpRight className="w-4 h-4 text-emerald-400 inline" />;
+    if (trend === "down") return <ArrowDownRight className="w-4 h-4 text-rose-400 inline" />;
+    return <Minus className="w-4 h-4 text-[#A5AA96] inline" />;
   };
 
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#2D3B30]">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black text-charcoal tracking-tight">
-              Agricultural Mandi & Market Prices
+            <h1 className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">
+              Agricultural Mandi & Market Quotations
             </h1>
-            <Badge variant="leaf" size="sm">APMC & Agmarknet</Badge>
+            <Badge variant="gold" size="sm">APMC & Agmarknet</Badge>
           </div>
-          <p className="text-xs text-muted mt-1 font-medium">
-            Track daily arrival prices, minimum/maximum/modal trading rates in INR (₹) per Quintal.
+          <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+            Daily arrival prices, modal trading rates, and price movement analytics in INR (₹) per Quintal.
           </p>
         </div>
 
         <button
           onClick={() => refetch()}
-          className={`px-3.5 py-2 rounded-xl border border-[#E5E8DD] bg-white hover:bg-sand-100 text-xs font-semibold text-charcoal flex items-center gap-1.5 shadow-subtle transition-colors cursor-pointer ${
+          className={`px-3.5 py-2 rounded-xl border border-[#2D3B30] bg-[#18251D] hover:bg-[#202B22] text-xs font-semibold text-[#D9CEB5] flex items-center gap-1.5 shadow-subtle transition-colors cursor-pointer ${
             isFetching ? "opacity-70" : ""
           }`}
         >
-          <RefreshCw className={`w-3.5 h-3.5 text-forest-700 ${isFetching ? "animate-spin" : ""}`} />
+          <RefreshCw className={`w-3.5 h-3.5 text-[#B69A62] ${isFetching ? "animate-spin" : ""}`} />
           Refresh Prices
         </button>
       </div>
 
       {/* Filters & Search Bar */}
-      <Card className="p-4">
+      <Card className="p-4 bg-[#18251D] border border-[#2D3B30]">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
           <div className="md:col-span-6 relative">
-            <Search className="w-4 h-4 text-muted absolute left-3 top-3" />
+            <Search className="w-4 h-4 text-[#A5AA96] absolute left-3 top-3" />
             <input
               type="text"
               placeholder="Search by crop, mandi market, or district (e.g. Onion, Khanna, Nashik)..."
@@ -144,7 +144,7 @@ export const MandiPricesPage = () => {
                 setSearchTerm(e.target.value);
                 setPage(1);
               }}
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD] placeholder:text-[#A5AA96]/50"
             />
           </div>
 
@@ -155,7 +155,7 @@ export const MandiPricesPage = () => {
                 setSelectedState(e.target.value);
                 setPage(1);
               }}
-              className="w-full px-3 py-2 text-xs rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal font-semibold cursor-pointer"
+              className="w-full px-3 py-2 text-xs rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD] font-medium cursor-pointer"
             >
               {INDIAN_STATES.map((st) => (
                 <option key={st} value={st}>
@@ -165,7 +165,7 @@ export const MandiPricesPage = () => {
             </select>
           </div>
 
-          <div className="md:col-span-2 text-right flex items-center justify-end text-xs text-muted font-medium">
+          <div className="md:col-span-2 text-right flex items-center justify-end text-xs text-[#A5AA96] font-medium font-mono">
             <span>{meta?.total ?? records.length} Mandis Found</span>
           </div>
         </div>
@@ -173,44 +173,44 @@ export const MandiPricesPage = () => {
 
       {/* 7-Day Price Trend Chart */}
       {trendData && (
-        <Card className="p-5">
+        <Card className="p-5 bg-gradient-to-br from-[#202B22] to-[#18251D] border border-[#2D3B30]">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <div>
-              <span className="text-[11px] font-bold text-forest-700 uppercase tracking-wider block">
+              <span className="text-[11px] font-serif font-bold text-[#D4BE8D] uppercase tracking-wider block">
                 Historical Price Analytics
               </span>
-              <h3 className="text-base font-bold text-charcoal">
+              <h3 className="text-base font-serif font-bold text-[#F0EBDD]">
                 7-Day Price Trend: {selectedCommodityForTrend} (₹ / Quintal)
               </h3>
             </div>
             <div className="text-right">
-              <span className="text-xs text-muted block">Current Modal Rate</span>
-              <span className="text-lg font-black text-forest-800">₹{basePriceForTrend}</span>
+              <span className="text-xs text-[#A5AA96] block font-mono">Current Modal Rate</span>
+              <span className="text-lg font-mono font-bold text-[#D4BE8D]">₹{basePriceForTrend}</span>
             </div>
           </div>
 
           <div className="h-56">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={trendData.trend}>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E8DD" />
-                <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#788579" }} stroke="#CCD3C0" />
-                <YAxis unit="₹" tick={{ fontSize: 11, fill: "#788579" }} stroke="#CCD3C0" domain={["dataMin - 100", "dataMax + 100"]} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#2D3B30" />
+                <XAxis dataKey="date" tick={{ fontSize: 11, fill: "#A5AA96" }} stroke="#2D3B30" />
+                <YAxis unit="₹" tick={{ fontSize: 11, fill: "#A5AA96" }} stroke="#2D3B30" domain={["dataMin - 100", "dataMax + 100"]} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "#FFFFFF",
-                    borderColor: "#E5E8DD",
+                    backgroundColor: "#18251D",
+                    borderColor: "#2D3B30",
                     borderRadius: "0.75rem",
-                    boxShadow: "0 4px 12px rgba(23,76,53,0.08)",
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.5)",
                     fontSize: "12px",
-                    color: "#202820"
+                    color: "#F0EBDD"
                   }}
                 />
                 <Line
                   type="monotone"
                   dataKey="modalPrice"
-                  stroke="#174C35"
+                  stroke="#B69A62"
                   strokeWidth={2.5}
-                  dot={{ r: 4, fill: "#65A765", stroke: "#FFFFFF", strokeWidth: 2 }}
+                  dot={{ r: 4, fill: "#71805A", stroke: "#101B16", strokeWidth: 2 }}
                   name="Modal Price (₹)"
                 />
               </LineChart>
@@ -225,10 +225,10 @@ export const MandiPricesPage = () => {
           <LoadingSkeleton count={6} className="h-44" />
         </div>
       ) : records.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-2xl border border-dashed border-[#CCD3C0]">
-          <Store className="w-12 h-12 text-muted/60 mx-auto mb-3" />
-          <h3 className="text-sm font-bold text-charcoal">No Mandis Matching Search Criteria</h3>
-          <p className="text-xs text-muted mt-1">Try selecting "All States" or clearing the search keyword.</p>
+        <div className="text-center py-16 bg-[#18251D] rounded-2xl border border-dashed border-[#2D3B30]">
+          <Store className="w-12 h-12 text-[#A5AA96]/50 mx-auto mb-3" />
+          <h3 className="text-sm font-serif font-bold text-[#F0EBDD]">No Mandis Matching Search Criteria</h3>
+          <p className="text-xs text-[#A5AA96] mt-1">Try selecting "All States" or clearing the search keyword.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -244,16 +244,16 @@ export const MandiPricesPage = () => {
                   setBasePriceForTrend(r.modalPrice);
                 }}
                 className={`cursor-pointer transition-all ${
-                  isSelected ? "ring-2 ring-forest-700 border-forest-600" : ""
+                  isSelected ? "ring-2 ring-[#B69A62] border-[#B69A62] shadow-gold-glow" : ""
                 }`}
               >
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-bold text-charcoal text-base">{r.commodity}</h4>
+                      <h4 className="font-serif font-bold text-[#F0EBDD] text-base">{r.commodity}</h4>
                       {getTrendIcon(r.priceTrend)}
                     </div>
-                    <span className="text-xs text-muted block mt-0.5">
+                    <span className="text-xs text-[#A5AA96] block mt-0.5">
                       {r.market}, {r.district} ({r.state})
                     </span>
                   </div>
@@ -265,35 +265,35 @@ export const MandiPricesPage = () => {
                     }}
                     title={isFav ? "Saved as favorite" : "Add to favorite markets"}
                     className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                      isFav ? "text-amber-600 bg-amber-50" : "text-muted/60 hover:text-charcoal"
+                      isFav ? "text-[#D4BE8D] bg-[#B69A62]/20" : "text-[#A5AA96]/50 hover:text-[#F0EBDD]"
                     }`}
                   >
-                    <Star className={`w-4 h-4 ${isFav ? "fill-amber-500" : ""}`} />
+                    <Star className={`w-4 h-4 ${isFav ? "fill-[#B69A62]" : ""}`} />
                   </button>
                 </div>
 
-                <div className="py-2.5 px-3 rounded-xl bg-sand-50/80 border border-[#E5E8DD] flex items-baseline justify-between mb-3">
+                <div className="py-2.5 px-3 rounded-xl bg-[#18251D] border border-[#2D3B30] flex items-baseline justify-between mb-3">
                   <div>
-                    <span className="text-[10px] text-muted block uppercase font-semibold">
-                      Modal Price
+                    <span className="text-[10px] text-[#A5AA96] block uppercase font-mono font-semibold">
+                      Modal Rate
                     </span>
-                    <span className="text-xl font-black text-forest-800">
+                    <span className="text-xl font-mono font-bold text-[#D4BE8D]">
                       ₹{r.modalPrice.toLocaleString()}
                     </span>
                   </div>
-                  <span className="text-[10px] text-muted font-medium">{r.unit}</span>
+                  <span className="text-[10px] text-[#A5AA96] font-mono">{r.unit}</span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-[11px] text-charcoal pt-2 border-t border-[#E5E8DD]">
+                <div className="grid grid-cols-2 gap-2 text-[11px] text-[#F0EBDD] pt-2 border-t border-[#2D3B30]">
                   <div>
-                    <span className="text-muted block text-[10px]">Min / Max Price</span>
-                    <span className="font-semibold text-charcoal">
+                    <span className="text-[#A5AA96] block text-[10px]">Min / Max Price</span>
+                    <span className="font-mono text-[#D9CEB5]">
                       ₹{r.minPrice} - ₹{r.maxPrice}
                     </span>
                   </div>
                   <div>
-                    <span className="text-muted block text-[10px]">Variety / Grade</span>
-                    <span className="font-semibold text-charcoal truncate block">
+                    <span className="text-[#A5AA96] block text-[10px]">Variety / Grade</span>
+                    <span className="font-medium text-[#D9CEB5] truncate block">
                       {r.variety} ({r.grade})
                     </span>
                   </div>
@@ -306,8 +306,8 @@ export const MandiPricesPage = () => {
 
       {/* Pagination Controls */}
       {meta && meta.totalPages > 1 && (
-        <div className="flex items-center justify-between pt-4 border-t border-[#E5E8DD] text-xs">
-          <span className="text-muted">
+        <div className="flex items-center justify-between pt-4 border-t border-[#2D3B30] text-xs">
+          <span className="text-[#A5AA96] font-mono">
             Page {meta.page} of {meta.totalPages} ({meta.total} total mandis)
           </span>
           <div className="flex gap-2">
@@ -332,9 +332,9 @@ export const MandiPricesPage = () => {
       )}
 
       {/* Source & Transparency Footnote */}
-      <div className="p-3.5 rounded-xl bg-[#F0F2EB] text-[11px] text-muted flex flex-wrap items-center justify-between gap-2 border border-[#E5E8DD]">
-        <span>Source: {meta?.source || "Agricultural Produce Market Committee (APMC)"}</span>
-        <span>Arrival Date: {new Date().toISOString().split("T")[0]}</span>
+      <div className="p-3.5 rounded-xl bg-[#18251D] text-[11px] text-[#A5AA96] flex flex-wrap items-center justify-between gap-2 border border-[#2D3B30]">
+        <span>Registry: {meta?.source || "Agricultural Produce Market Committee (APMC)"}</span>
+        <span className="font-mono">Arrival Date: {new Date().toISOString().split("T")[0]}</span>
       </div>
     </div>
   );

@@ -8,19 +8,20 @@ export const Badge = ({
   size = "md"
 }) => {
   const variantStyles = {
-    success: "bg-[#E4F4E4] text-[#174C35] border-[#C7E7C7]",
-    leaf: "bg-[#F0F6F3] text-[#174C35] border-[#DCE9E2]",
-    warning: "bg-[#FEF8E7] text-[#8B6548] border-[#FCEFC7]",
-    danger: "bg-[#FEF2F2] text-[#991B1B] border-[#FECACA]",
-    info: "bg-[#EFF6FF] text-[#1D4ED8] border-[#BFDBFE]",
-    neutral: "bg-[#F7F8F2] text-[#202820] border-[#E5E8DD]",
-    sand: "bg-[#F7F8F2] text-[#202820] border-[#E5E8DD]",
-    soil: "bg-[#FAF6F2] text-[#735239] border-[#E6D7C8]",
-    earth: "bg-[#FAF6F2] text-[#735239] border-[#E6D7C8]"
+    success: "bg-[#294C36]/50 text-[#A4D5A4] border-[#294C36]/80",
+    leaf: "bg-[#294C36]/40 text-[#A4D5A4] border-[#3F7655]/60",
+    gold: "bg-[#B69A62]/15 text-[#D4BE8D] border-[#B69A62]/35",
+    warning: "bg-[#B69A62]/20 text-[#D4BE8D] border-[#B69A62]/40",
+    danger: "bg-[#8B2E2E]/30 text-[#FCA5A5] border-[#8B2E2E]/60",
+    info: "bg-[#1E3A5F]/40 text-[#93C5FD] border-[#2563EB]/40",
+    neutral: "bg-[#18251D] text-[#D9CEB5] border-[#2D3B30]",
+    sand: "bg-[#18251D] text-[#D9CEB5] border-[#2D3B30]",
+    soil: "bg-[#79563C]/35 text-[#D5BEA8] border-[#79563C]/60",
+    earth: "bg-[#79563C]/35 text-[#D5BEA8] border-[#79563C]/60"
   };
 
   const sizeStyles = {
-    sm: "text-[11px] px-2 py-0.5",
+    sm: "text-[10px] px-2 py-0.5",
     md: "text-xs font-medium px-2.5 py-0.5"
   };
 

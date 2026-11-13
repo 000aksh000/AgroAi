@@ -180,15 +180,19 @@ export const FarmsPage = () => {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#2D3B30]">
         <div>
-          <h1 className="text-2xl font-black text-charcoal tracking-tight">Farm Plot Management</h1>
-          <p className="text-xs text-muted mt-1 font-medium">
-            Create, view, and organize your agricultural plots, soil measurements, and irrigation sources.
+          <h1 className="text-2xl font-serif font-bold text-[#F0EBDD] tracking-tight">Farm Plot Registry</h1>
+          <p className="text-xs text-[#A5AA96] mt-1 font-medium">
+            Catalog and monitor agricultural parcels, soil chemistry, and irrigation sources for customized AI modeling.
           </p>
         </div>
-        <Button onClick={openCreateModal} icon={<Plus className="w-4 h-4" />}>
-          Add New Farm Plot
+        <Button
+          onClick={openCreateModal}
+          icon={<Plus className="w-4 h-4 text-[#D4BE8D]" />}
+          className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40"
+        >
+          Register New Farm Plot
         </Button>
       </div>
 
@@ -196,9 +200,9 @@ export const FarmsPage = () => {
       {farms.length === 0 ? (
         <EmptyState
           icon={<Tractor className="w-8 h-8" />}
-          title="No farm profiles yet"
-          description="Create your first farm profile with your land area, soil type, and location to unlock custom AI crop advisories."
-          actionText="Create Farm Profile"
+          title="No farm parcels cataloged yet"
+          description="Create your initial farm parcel with acreage, soil chemistry, and location to unlock specialized crop recommendations."
+          actionText="Register First Farm Plot"
           onAction={openCreateModal}
         />
       ) : (
@@ -210,18 +214,18 @@ export const FarmsPage = () => {
                 key={farm.id}
                 hoverable
                 className={`flex flex-col justify-between transition-all ${
-                  isSelected ? "ring-2 ring-forest-700 border-forest-600 shadow-card" : ""
+                  isSelected ? "ring-2 ring-[#B69A62] border-[#B69A62] shadow-gold-glow" : ""
                 }`}
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-charcoal text-base">{farm.name}</h3>
-                        {isSelected && <Badge variant="leaf" size="sm">Active Plot</Badge>}
+                        <h3 className="font-serif font-bold text-[#F0EBDD] text-base">{farm.name}</h3>
+                        {isSelected && <Badge variant="gold" size="sm">Active Parcel</Badge>}
                       </div>
-                      <span className="text-xs text-muted flex items-center gap-1 mt-0.5">
-                        <MapPin className="w-3 h-3 text-soil-500" />
+                      <span className="text-xs text-[#A5AA96] flex items-center gap-1 mt-0.5">
+                        <MapPin className="w-3 h-3 text-[#B69A62]" />
                         {farm.village ? `${farm.village}, ` : ""}
                         {farm.district}, {farm.state}
                       </span>
@@ -230,7 +234,7 @@ export const FarmsPage = () => {
                     <div className="flex items-center gap-1">
                       <button
                         onClick={() => openEditModal(farm)}
-                        className="p-1.5 text-muted hover:text-charcoal hover:bg-sand-100 rounded-lg transition-colors cursor-pointer"
+                        className="p-1.5 text-[#A5AA96] hover:text-[#F0EBDD] hover:bg-[#18251D] rounded-lg transition-colors cursor-pointer"
                         title="Edit farm"
                       >
                         <Edit2 className="w-4 h-4" />
@@ -241,7 +245,7 @@ export const FarmsPage = () => {
                             deleteFarmMutation.mutate(farm.id);
                           }
                         }}
-                        className="p-1.5 text-muted hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                        className="p-1.5 text-[#A5AA96] hover:text-rose-400 hover:bg-[#18251D] rounded-lg transition-colors cursor-pointer"
                         title="Delete farm"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -249,37 +253,37 @@ export const FarmsPage = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs py-3 border-y border-[#E5E8DD] my-3">
+                  <div className="grid grid-cols-2 gap-2 text-xs py-3 border-y border-[#2D3B30] my-3">
                     <div>
-                      <span className="text-muted block text-[10px] uppercase font-semibold">Total Area</span>
-                      <span className="font-bold text-charcoal">
+                      <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Total Area</span>
+                      <span className="font-semibold text-[#F0EBDD]">
                         {farm.area} {farm.areaUnit}
                       </span>
                     </div>
                     <div>
-                      <span className="text-muted block text-[10px] uppercase font-semibold">Soil Type</span>
-                      <span className="font-bold text-soil-700">{farm.soilType}</span>
+                      <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Soil Profile</span>
+                      <span className="font-semibold text-[#D4BE8D]">{farm.soilType}</span>
                     </div>
                     <div>
-                      <span className="text-muted block text-[10px] uppercase font-semibold">Soil pH</span>
-                      <span className="font-bold text-charcoal">{farm.soilPh || "Not set"}</span>
+                      <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Soil pH</span>
+                      <span className="font-mono text-[#F0EBDD]">{farm.soilPh || "Not set"}</span>
                     </div>
                     <div>
-                      <span className="text-muted block text-[10px] uppercase font-semibold">Irrigation</span>
-                      <span className="font-bold text-charcoal">{farm.irrigationMethod}</span>
+                      <span className="text-[#A5AA96] block text-[10px] uppercase font-semibold">Irrigation</span>
+                      <span className="font-semibold text-[#F0EBDD]">{farm.irrigationMethod}</span>
                     </div>
                   </div>
 
                   {farm.currentCrops.length > 0 && (
                     <div className="mb-4">
-                      <span className="text-[10px] text-muted font-semibold uppercase block mb-1">
-                        Cultivated Crops
+                      <span className="text-[10px] text-[#A5AA96] font-semibold uppercase block mb-1">
+                        Cultivated Flora
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {farm.currentCrops.map((c) => (
                           <span
                             key={c}
-                            className="text-xs px-2 py-0.5 rounded-md bg-[#F0F2EB] text-forest-800 font-medium border border-[#E5E8DD]"
+                            className="text-xs px-2 py-0.5 rounded-lg bg-[#18251D] text-[#D9CEB5] font-medium border border-[#2D3B30]"
                           >
                             {c}
                           </span>
@@ -297,11 +301,11 @@ export const FarmsPage = () => {
                       onClick={() => setSelectedFarm(farm)}
                       className="w-full"
                     >
-                      Set as Active Farm
+                      Set as Active Parcel
                     </Button>
                   ) : (
                     <Link to="/crop-recommendation" className="w-full">
-                      <Button size="sm" className="w-full" icon={<Wheat className="w-4 h-4" />}>
+                      <Button size="sm" className="w-full" icon={<Wheat className="w-4 h-4 text-[#D4BE8D]" />}>
                         Recommend Crops
                       </Button>
                     </Link>
@@ -317,11 +321,11 @@ export const FarmsPage = () => {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title={editingFarm ? "Edit Farm Profile" : "Add New Farm Plot"}
+        title={editingFarm ? "Edit Farm Parcel Record" : "Register New Farm Parcel"}
         maxWidth="lg"
       >
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+          <div className="mb-4 p-3 rounded-xl bg-[#8B2E2E]/25 border border-[#8B2E2E]/50 text-[#FCA5A5] text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -335,26 +339,26 @@ export const FarmsPage = () => {
           className="space-y-4"
         >
           <div>
-            <label className="block text-xs font-semibold text-charcoal mb-1">
-              Farm Name
+            <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">
+              Parcel Name
             </label>
             <input
               type="text"
               required
-              placeholder="e.g. Nashik South Orchard"
+              placeholder="e.g. Nashik South Orchard Parcel"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">State</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">State</label>
               <select
                 value={formData.state}
                 onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               >
                 {INDIAN_STATES.map((s) => (
                   <option key={s} value={s}>
@@ -364,32 +368,32 @@ export const FarmsPage = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">District</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">District</label>
               <input
                 type="text"
                 required
                 placeholder="e.g. Nashik"
                 value={formData.district}
                 onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">Village (Optional)</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Village (Optional)</label>
               <input
                 type="text"
                 placeholder="e.g. Lasalgaon"
                 value={formData.village}
                 onChange={(e) => setFormData({ ...formData, village: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-semibold text-charcoal mb-1">Area</label>
+                <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Area</label>
                 <input
                   type="number"
                   step="0.1"
@@ -397,15 +401,15 @@ export const FarmsPage = () => {
                   min="0.1"
                   value={formData.area}
                   onChange={(e) => setFormData({ ...formData, area: parseFloat(e.target.value) || 0 })}
-                  className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-charcoal mb-1">Unit</label>
+                <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Unit</label>
                 <select
                   value={formData.areaUnit}
                   onChange={(e) => setFormData({ ...formData, areaUnit: e.target.value })}
-                  className="w-full px-2 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                  className="w-full px-2 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
                 >
                   <option value="Acres">Acres</option>
                   <option value="Hectares">Hectares</option>
@@ -418,11 +422,11 @@ export const FarmsPage = () => {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">Soil Type</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Soil Profile Type</label>
               <select
                 value={formData.soilType}
                 onChange={(e) => setFormData({ ...formData, soilType: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               >
                 {SOIL_TYPES.map((st) => (
                   <option key={st} value={st}>
@@ -432,7 +436,7 @@ export const FarmsPage = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">Soil pH (3.5 - 9.5)</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Soil pH (3.5 - 9.5)</label>
               <input
                 type="number"
                 step="0.1"
@@ -440,54 +444,54 @@ export const FarmsPage = () => {
                 max="9.5"
                 value={formData.soilPh}
                 onChange={(e) => setFormData({ ...formData, soilPh: parseFloat(e.target.value) || 7 })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">N (kg/ha)</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">N (kg/ha)</label>
               <input
                 type="number"
                 min="0"
                 max="300"
                 value={formData.nitrogen}
                 onChange={(e) => setFormData({ ...formData, nitrogen: parseInt(e.target.value, 10) || 0 })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">P (kg/ha)</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">P (kg/ha)</label>
               <input
                 type="number"
                 min="0"
                 max="200"
                 value={formData.phosphorus}
                 onChange={(e) => setFormData({ ...formData, phosphorus: parseInt(e.target.value, 10) || 0 })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">K (kg/ha)</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">K (kg/ha)</label>
               <input
                 type="number"
                 min="0"
                 max="300"
                 value={formData.potassium}
                 onChange={(e) => setFormData({ ...formData, potassium: parseInt(e.target.value, 10) || 0 })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">Irrigation Method</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Irrigation Method</label>
               <select
                 value={formData.irrigationMethod}
                 onChange={(e) => setFormData({ ...formData, irrigationMethod: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               >
                 {IRRIGATION_METHODS.map((im) => (
                   <option key={im} value={im}>
@@ -497,11 +501,11 @@ export const FarmsPage = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-charcoal mb-1">Water Availability</label>
+              <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">Water Abundance</label>
               <select
                 value={formData.waterAvailability}
                 onChange={(e) => setFormData({ ...formData, waterAvailability: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
               >
                 {WATER_AVAILABILITIES.map((wa) => (
                   <option key={wa} value={wa}>
@@ -513,7 +517,7 @@ export const FarmsPage = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-charcoal mb-1">
+            <label className="block text-xs font-serif font-bold text-[#D9CEB5] mb-1">
               Current Cultivated Crops (Comma separated)
             </label>
             <input
@@ -521,16 +525,20 @@ export const FarmsPage = () => {
               placeholder="e.g. Onion, Tomato, Maize"
               value={formData.currentCrops}
               onChange={(e) => setFormData({ ...formData, currentCrops: e.target.value })}
-              className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              className="w-full px-3 py-2 text-sm rounded-xl border border-[#2D3B30] focus:outline-none focus:ring-2 focus:ring-[#B69A62] bg-[#101B16] text-[#F0EBDD]"
             />
           </div>
 
-          <div className="pt-3 flex justify-end gap-2 border-t border-[#E5E8DD]">
+          <div className="pt-3 flex justify-end gap-2 border-t border-[#2D3B30]">
             <Button variant="ghost" type="button" onClick={() => setIsModalOpen(false)}>
               Cancel
             </Button>
-            <Button type="submit" isLoading={saveFarmMutation.isPending}>
-              {editingFarm ? "Save Changes" : "Create Farm Profile"}
+            <Button
+              type="submit"
+              isLoading={saveFarmMutation.isPending}
+              className="bg-[#294C36] hover:bg-[#346045] text-[#F0EBDD] border border-[#B69A62]/40"
+            >
+              {editingFarm ? "Update Record" : "Save Parcel"}
             </Button>
           </div>
         </form>

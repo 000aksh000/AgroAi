@@ -4,64 +4,101 @@
 
 @layer base {
   body {
-    background-color: #F7F8F2;
-    color: #202820;
+    background-color: #101B16;
+    background-image: 
+      radial-gradient(circle at 10% 15%, rgba(41, 76, 54, 0.28) 0%, transparent 45%),
+      radial-gradient(circle at 90% 70%, rgba(121, 86, 60, 0.18) 0%, transparent 40%),
+      radial-gradient(circle at 50% 95%, rgba(113, 128, 90, 0.15) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    color: #F0EBDD;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   ::selection {
-    background-color: #C7E7C7;
-    color: #0E2E1F;
+    background-color: rgba(182, 154, 98, 0.35);
+    color: #FBF8F2;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    color: #202820;
-    letter-spacing: -0.02em;
+  h1, h2, h3 {
+    font-family: "Playfair Display", "DM Serif Display", Georgia, serif;
+    color: #F0EBDD;
+    letter-spacing: -0.01em;
+  }
+
+  h4, h5, h6 {
+    color: #F0EBDD;
+    letter-spacing: -0.01em;
   }
 }
 
-/* Refined Minimalist Scrollbars */
+/* Vintage Botanical Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F0F2EB;
+  background: #101B16;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #CCD3C0;
+  background: #2D3B30;
   border-radius: 9999px;
+  border: 1px solid rgba(182, 154, 98, 0.15);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8C1AA;
+  background: #71805A;
+  border-color: rgba(182, 154, 98, 0.4);
 }
 
-/* Premium Surface Panels */
-.surface-card {
-  background-color: #FFFFFF;
-  border: 1px solid #E5E8DD;
-  box-shadow: 0 1px 3px 0 rgba(32, 40, 32, 0.04), 0 4px 12px -2px rgba(32, 40, 32, 0.02);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* Dark Vintage Botanical Cards & Panels */
+.botanical-card {
+  background-color: #202B22;
+  border: 1px solid #2D3B30;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(182, 154, 98, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.surface-card:hover {
-  border-color: #CCD3C0;
-  box-shadow: 0 4px 16px -2px rgba(23, 76, 53, 0.06), 0 2px 6px -1px rgba(23, 76, 53, 0.03);
+.botanical-card:hover {
+  border-color: rgba(182, 154, 98, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(182, 154, 98, 0.25);
 }
 
-.glass-header {
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #E5E8DD;
+.botanical-header {
+  background: rgba(16, 27, 22, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #2D3B30;
 }
 
-.subtle-badge {
-  background-color: #F0F6F3;
-  color: #174C35;
-  border: 1px solid #DCE9E2;
+.vintage-gold-badge {
+  background-color: rgba(182, 154, 98, 0.12);
+  color: #D4BE8D;
+  border: 1px solid rgba(182, 154, 98, 0.3);
+}
+
+/* Botanical journal divider */
+.botanical-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #71805A;
+  margin: 1.5rem 0;
+}
+
+.botanical-divider::before,
+.botanical-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #2D3B30;
+}
+
+.botanical-divider:not(:empty)::before {
+  margin-right: .75em;
+}
+
+.botanical-divider:not(:empty)::after {
+  margin-left: .75em;
 }
