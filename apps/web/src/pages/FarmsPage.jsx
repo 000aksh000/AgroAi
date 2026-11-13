@@ -17,6 +17,7 @@ import { Badge } from "../components/ui/Badge";
 import { Modal } from "../components/ui/Modal";
 import { EmptyState } from "../components/ui/EmptyState";
 import { Link } from "react-router-dom";
+
 const INDIAN_STATES = [
   "Maharashtra",
   "Punjab",
@@ -31,6 +32,7 @@ const INDIAN_STATES = [
   "West Bengal",
   "Bihar"
 ];
+
 const SOIL_TYPES = [
   "Black",
   "Alluvial",
@@ -43,6 +45,7 @@ const SOIL_TYPES = [
   "Saline",
   "Peaty/Marshy"
 ];
+
 const IRRIGATION_METHODS = [
   "Drip",
   "Sprinkler",
@@ -51,18 +54,21 @@ const IRRIGATION_METHODS = [
   "Rainfed",
   "Tube Well"
 ];
+
 const WATER_AVAILABILITIES = [
   "Abundant",
   "Moderate",
   "Scarce",
   "Seasonal Rainfed"
 ];
+
 export const FarmsPage = () => {
   const { farms, selectedFarm, setSelectedFarm, refetchFarms } = useFarm();
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingFarm, setEditingFarm] = useState(null);
   const [error, setError] = useState(null);
+
   const [formData, setFormData] = useState({
     name: "",
     state: "Maharashtra",
@@ -81,6 +87,7 @@ export const FarmsPage = () => {
     currentSeason: "Kharif",
     notes: ""
   });
+
   const openCreateModal = () => {
     setEditingFarm(null);
     setFormData({
@@ -104,6 +111,7 @@ export const FarmsPage = () => {
     setError(null);
     setIsModalOpen(true);
   };
+
   const openEditModal = (farm) => {
     setEditingFarm(farm);
     setFormData({
@@ -114,7 +122,7 @@ export const FarmsPage = () => {
       area: farm.area,
       areaUnit: farm.areaUnit,
       soilType: farm.soilType,
-      soilPh: farm.soilPh || 7,
+      soilPh: farm.soilPh || 7.0,
       nitrogen: farm.nitrogen || 80,
       phosphorus: farm.phosphorus || 40,
       potassium: farm.potassium || 40,
@@ -127,17 +135,22 @@ export const FarmsPage = () => {
     setError(null);
     setIsModalOpen(true);
   };
+
   const saveFarmMutation = useMutation({
     mutationFn: async () => {
       const payload = {
         ...formData,
         area: Number(formData.area),
-        soilPh: formData.soilPh ? Number(formData.soilPh) : void 0,
-        nitrogen: formData.nitrogen ? Number(formData.nitrogen) : void 0,
-        phosphorus: formData.phosphorus ? Number(formData.phosphorus) : void 0,
-        potassium: formData.potassium ? Number(formData.potassium) : void 0,
-        currentCrops: formData.currentCrops.split(",").map((c) => c.trim()).filter(Boolean)
+        soilPh: formData.soilPh ? Number(formData.soilPh) : undefined,
+        nitrogen: formData.nitrogen ? Number(formData.nitrogen) : undefined,
+        phosphorus: formData.phosphorus ? Number(formData.phosphorus) : undefined,
+        potassium: formData.potassium ? Number(formData.potassium) : undefined,
+        currentCrops: formData.currentCrops
+          .split(",")
+          .map((c) => c.trim())
+          .filter(Boolean)
       };
+
       if (editingFarm) {
         return await apiClient.put(`/farms/${editingFarm.id}`, payload);
       } else {
@@ -153,6 +166,7 @@ export const FarmsPage = () => {
       setError(err.response?.data?.error?.message || "Failed to save farm details.");
     }
   });
+
   const deleteFarmMutation = useMutation({
     mutationFn: async (id) => {
       await apiClient.delete(`/farms/${id}`);
@@ -162,14 +176,14 @@ export const FarmsPage = () => {
       queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
     }
   });
-  return <div className="space-y-6">
-      {
-    /* Page Header */
-  }
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
+
+  return (
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
         <div>
-          <h1 className="text-2xl font-black text-soil-900 tracking-tight">Farm Plot Management</h1>
-          <p className="text-xs text-soil-500 mt-1 font-medium">
+          <h1 className="text-2xl font-black text-charcoal tracking-tight">Farm Plot Management</h1>
+          <p className="text-xs text-muted mt-1 font-medium">
             Create, view, and organize your agricultural plots, soil measurements, and irrigation sources.
           </p>
         </div>
@@ -178,200 +192,221 @@ export const FarmsPage = () => {
         </Button>
       </div>
 
-      {
-    /* Farms List */
-  }
-      {farms.length === 0 ? <EmptyState
-    icon={<Tractor className="w-8 h-8" />}
-    title="No farm profiles yet"
-    description="Create your first farm profile with your land area, soil type, and location to unlock custom AI crop advisories."
-    actionText="Create Farm Profile"
-    onAction={openCreateModal}
-  /> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Farms List */}
+      {farms.length === 0 ? (
+        <EmptyState
+          icon={<Tractor className="w-8 h-8" />}
+          title="No farm profiles yet"
+          description="Create your first farm profile with your land area, soil type, and location to unlock custom AI crop advisories."
+          actionText="Create Farm Profile"
+          onAction={openCreateModal}
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {farms.map((farm) => {
-    const isSelected = selectedFarm?.id === farm.id;
-    return <Card
-      key={farm.id}
-      hoverable
-      className={`flex flex-col justify-between transition-all ${isSelected ? "ring-2 ring-agri-600 border-agri-300" : ""}`}
-    >
+            const isSelected = selectedFarm?.id === farm.id;
+            return (
+              <Card
+                key={farm.id}
+                hoverable
+                className={`flex flex-col justify-between transition-all ${
+                  isSelected ? "ring-2 ring-forest-700 border-forest-600 shadow-card" : ""
+                }`}
+              >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-slate-900 text-base">{farm.name}</h3>
-                        {isSelected && <Badge variant="success" size="sm">Active Farm</Badge>}
+                        <h3 className="font-bold text-charcoal text-base">{farm.name}</h3>
+                        {isSelected && <Badge variant="leaf" size="sm">Active Plot</Badge>}
                       </div>
-                      <span className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                        <MapPin className="w-3 h-3" />
-                        {farm.village ? `${farm.village}, ` : ""}{farm.district}, {farm.state}
+                      <span className="text-xs text-muted flex items-center gap-1 mt-0.5">
+                        <MapPin className="w-3 h-3 text-soil-500" />
+                        {farm.village ? `${farm.village}, ` : ""}
+                        {farm.district}, {farm.state}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-1">
                       <button
-      onClick={() => openEditModal(farm)}
-      className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg"
-      title="Edit farm"
-    >
+                        onClick={() => openEditModal(farm)}
+                        className="p-1.5 text-muted hover:text-charcoal hover:bg-sand-100 rounded-lg transition-colors cursor-pointer"
+                        title="Edit farm"
+                      >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
-      onClick={() => {
-        if (confirm(`Are you sure you want to delete farm "${farm.name}"?`)) {
-          deleteFarmMutation.mutate(farm.id);
-        }
-      }}
-      className="p-1.5 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg"
-      title="Delete farm"
-    >
+                        onClick={() => {
+                          if (confirm(`Are you sure you want to delete farm "${farm.name}"?`)) {
+                            deleteFarmMutation.mutate(farm.id);
+                          }
+                        }}
+                        className="p-1.5 text-muted hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors cursor-pointer"
+                        title="Delete farm"
+                      >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs py-3 border-y border-slate-100 my-3">
+                  <div className="grid grid-cols-2 gap-2 text-xs py-3 border-y border-[#E5E8DD] my-3">
                     <div>
-                      <span className="text-slate-400 block text-[10px] uppercase font-semibold">Total Area</span>
-                      <span className="font-bold text-slate-800">{farm.area} {farm.areaUnit}</span>
+                      <span className="text-muted block text-[10px] uppercase font-semibold">Total Area</span>
+                      <span className="font-bold text-charcoal">
+                        {farm.area} {farm.areaUnit}
+                      </span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block text-[10px] uppercase font-semibold">Soil Type</span>
-                      <span className="font-bold text-slate-800">{farm.soilType}</span>
+                      <span className="text-muted block text-[10px] uppercase font-semibold">Soil Type</span>
+                      <span className="font-bold text-soil-700">{farm.soilType}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block text-[10px] uppercase font-semibold">Soil pH</span>
-                      <span className="font-bold text-slate-800">{farm.soilPh || "Not set"}</span>
+                      <span className="text-muted block text-[10px] uppercase font-semibold">Soil pH</span>
+                      <span className="font-bold text-charcoal">{farm.soilPh || "Not set"}</span>
                     </div>
                     <div>
-                      <span className="text-slate-400 block text-[10px] uppercase font-semibold">Irrigation</span>
-                      <span className="font-bold text-slate-800">{farm.irrigationMethod}</span>
+                      <span className="text-muted block text-[10px] uppercase font-semibold">Irrigation</span>
+                      <span className="font-bold text-charcoal">{farm.irrigationMethod}</span>
                     </div>
                   </div>
 
-                  {farm.currentCrops.length > 0 && <div className="mb-4">
-                      <span className="text-[10px] text-slate-400 font-semibold uppercase block mb-1">
+                  {farm.currentCrops.length > 0 && (
+                    <div className="mb-4">
+                      <span className="text-[10px] text-muted font-semibold uppercase block mb-1">
                         Cultivated Crops
                       </span>
                       <div className="flex flex-wrap gap-1.5">
-                        {farm.currentCrops.map((c) => <span
-      key={c}
-      className="text-xs px-2 py-0.5 rounded-md bg-earth-100 text-earth-800 font-medium"
-    >
+                        {farm.currentCrops.map((c) => (
+                          <span
+                            key={c}
+                            className="text-xs px-2 py-0.5 rounded-md bg-[#F0F2EB] text-forest-800 font-medium border border-[#E5E8DD]"
+                          >
                             {c}
-                          </span>)}
+                          </span>
+                        ))}
                       </div>
-                    </div>}
+                    </div>
+                  )}
                 </div>
 
                 <div className="pt-2 flex items-center justify-between gap-2">
-                  {!isSelected ? <Button
-      variant="outline"
-      size="sm"
-      onClick={() => setSelectedFarm(farm)}
-      className="w-full"
-    >
+                  {!isSelected ? (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setSelectedFarm(farm)}
+                      className="w-full"
+                    >
                       Set as Active Farm
-                    </Button> : <Link to="/crop-recommendation" className="w-full">
+                    </Button>
+                  ) : (
+                    <Link to="/crop-recommendation" className="w-full">
                       <Button size="sm" className="w-full" icon={<Wheat className="w-4 h-4" />}>
                         Recommend Crops
                       </Button>
-                    </Link>}
+                    </Link>
+                  )}
                 </div>
-              </Card>;
-  })}
-        </div>}
+              </Card>
+            );
+          })}
+        </div>
+      )}
 
-      {
-    /* Farm Create/Edit Modal */
-  }
+      {/* Farm Create/Edit Modal */}
       <Modal
-    isOpen={isModalOpen}
-    onClose={() => setIsModalOpen(false)}
-    title={editingFarm ? "Edit Farm Profile" : "Add New Farm Plot"}
-    maxWidth="lg"
-  >
-        {error && <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={editingFarm ? "Edit Farm Profile" : "Add New Farm Plot"}
+        maxWidth="lg"
+      >
+        {error && (
+          <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
-          </div>}
+          </div>
+        )}
 
         <form
-    onSubmit={(e) => {
-      e.preventDefault();
-      saveFarmMutation.mutate();
-    }}
-    className="space-y-4"
-  >
+          onSubmit={(e) => {
+            e.preventDefault();
+            saveFarmMutation.mutate();
+          }}
+          className="space-y-4"
+        >
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-charcoal mb-1">
               Farm Name
             </label>
             <input
-    type="text"
-    required
-    placeholder="e.g. Nashik South Orchard"
-    value={formData.name}
-    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+              type="text"
+              required
+              placeholder="e.g. Nashik South Orchard"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">State</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">State</label>
               <select
-    value={formData.state}
-    onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
-                {INDIAN_STATES.map((s) => <option key={s} value={s}>{s}</option>)}
+                value={formData.state}
+                onChange={(e) => setFormData({ ...formData, state: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              >
+                {INDIAN_STATES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">District</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">District</label>
               <input
-    type="text"
-    required
-    placeholder="e.g. Nashik"
-    value={formData.district}
-    onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="text"
+                required
+                placeholder="e.g. Nashik"
+                value={formData.district}
+                onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Village (Optional)</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">Village (Optional)</label>
               <input
-    type="text"
-    placeholder="e.g. Lasalgaon"
-    value={formData.village}
-    onChange={(e) => setFormData({ ...formData, village: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="text"
+                placeholder="e.g. Lasalgaon"
+                value={formData.village}
+                onChange={(e) => setFormData({ ...formData, village: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Area</label>
+                <label className="block text-xs font-semibold text-charcoal mb-1">Area</label>
                 <input
-    type="number"
-    step="0.1"
-    required
-    min="0.1"
-    value={formData.area}
-    onChange={(e) => setFormData({ ...formData, area: parseFloat(e.target.value) || 0 })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                  type="number"
+                  step="0.1"
+                  required
+                  min="0.1"
+                  value={formData.area}
+                  onChange={(e) => setFormData({ ...formData, area: parseFloat(e.target.value) || 0 })}
+                  className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-slate-700 mb-1">Unit</label>
+                <label className="block text-xs font-semibold text-charcoal mb-1">Unit</label>
                 <select
-    value={formData.areaUnit}
-    onChange={(e) => setFormData({ ...formData, areaUnit: e.target.value })}
-    className="w-full px-2 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
+                  value={formData.areaUnit}
+                  onChange={(e) => setFormData({ ...formData, areaUnit: e.target.value })}
+                  className="w-full px-2 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+                >
                   <option value="Acres">Acres</option>
                   <option value="Hectares">Hectares</option>
                   <option value="Bigha">Bigha</option>
@@ -383,102 +418,114 @@ export const FarmsPage = () => {
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Soil Type</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">Soil Type</label>
               <select
-    value={formData.soilType}
-    onChange={(e) => setFormData({ ...formData, soilType: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
-                {SOIL_TYPES.map((st) => <option key={st} value={st}>{st}</option>)}
+                value={formData.soilType}
+                onChange={(e) => setFormData({ ...formData, soilType: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              >
+                {SOIL_TYPES.map((st) => (
+                  <option key={st} value={st}>
+                    {st}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Soil pH (3.5 - 9.5)</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">Soil pH (3.5 - 9.5)</label>
               <input
-    type="number"
-    step="0.1"
-    min="3.5"
-    max="9.5"
-    value={formData.soilPh}
-    onChange={(e) => setFormData({ ...formData, soilPh: parseFloat(e.target.value) || 7 })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="number"
+                step="0.1"
+                min="3.5"
+                max="9.5"
+                value={formData.soilPh}
+                onChange={(e) => setFormData({ ...formData, soilPh: parseFloat(e.target.value) || 7 })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-3 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">N (kg/ha)</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">N (kg/ha)</label>
               <input
-    type="number"
-    min="0"
-    max="300"
-    value={formData.nitrogen}
-    onChange={(e) => setFormData({ ...formData, nitrogen: parseInt(e.target.value, 10) || 0 })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="number"
+                min="0"
+                max="300"
+                value={formData.nitrogen}
+                onChange={(e) => setFormData({ ...formData, nitrogen: parseInt(e.target.value, 10) || 0 })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">P (kg/ha)</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">P (kg/ha)</label>
               <input
-    type="number"
-    min="0"
-    max="200"
-    value={formData.phosphorus}
-    onChange={(e) => setFormData({ ...formData, phosphorus: parseInt(e.target.value, 10) || 0 })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="number"
+                min="0"
+                max="200"
+                value={formData.phosphorus}
+                onChange={(e) => setFormData({ ...formData, phosphorus: parseInt(e.target.value, 10) || 0 })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">K (kg/ha)</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">K (kg/ha)</label>
               <input
-    type="number"
-    min="0"
-    max="300"
-    value={formData.potassium}
-    onChange={(e) => setFormData({ ...formData, potassium: parseInt(e.target.value, 10) || 0 })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+                type="number"
+                min="0"
+                max="300"
+                value={formData.potassium}
+                onChange={(e) => setFormData({ ...formData, potassium: parseInt(e.target.value, 10) || 0 })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              />
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Irrigation Method</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">Irrigation Method</label>
               <select
-    value={formData.irrigationMethod}
-    onChange={(e) => setFormData({ ...formData, irrigationMethod: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
-                {IRRIGATION_METHODS.map((im) => <option key={im} value={im}>{im}</option>)}
+                value={formData.irrigationMethod}
+                onChange={(e) => setFormData({ ...formData, irrigationMethod: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              >
+                {IRRIGATION_METHODS.map((im) => (
+                  <option key={im} value={im}>
+                    {im}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-700 mb-1">Water Availability</label>
+              <label className="block text-xs font-semibold text-charcoal mb-1">Water Availability</label>
               <select
-    value={formData.waterAvailability}
-    onChange={(e) => setFormData({ ...formData, waterAvailability: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500 bg-white"
-  >
-                {WATER_AVAILABILITIES.map((wa) => <option key={wa} value={wa}>{wa}</option>)}
+                value={formData.waterAvailability}
+                onChange={(e) => setFormData({ ...formData, waterAvailability: e.target.value })}
+                className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+              >
+                {WATER_AVAILABILITIES.map((wa) => (
+                  <option key={wa} value={wa}>
+                    {wa}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1">
+            <label className="block text-xs font-semibold text-charcoal mb-1">
               Current Cultivated Crops (Comma separated)
             </label>
             <input
-    type="text"
-    placeholder="e.g. Onion, Tomato, Maize"
-    value={formData.currentCrops}
-    onChange={(e) => setFormData({ ...formData, currentCrops: e.target.value })}
-    className="w-full px-3 py-2 text-sm rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-agri-500"
-  />
+              type="text"
+              placeholder="e.g. Onion, Tomato, Maize"
+              value={formData.currentCrops}
+              onChange={(e) => setFormData({ ...formData, currentCrops: e.target.value })}
+              className="w-full px-3 py-2 text-sm rounded-xl border border-[#E5E8DD] focus:outline-none focus:ring-2 focus:ring-forest-600 focus:border-forest-600 bg-white text-charcoal"
+            />
           </div>
 
-          <div className="pt-3 flex justify-end gap-2 border-t border-slate-100">
+          <div className="pt-3 flex justify-end gap-2 border-t border-[#E5E8DD]">
             <Button variant="ghost" type="button" onClick={() => setIsModalOpen(false)}>
               Cancel
             </Button>
@@ -488,5 +535,6 @@ export const FarmsPage = () => {
           </div>
         </form>
       </Modal>
-    </div>;
+    </div>
+  );
 };

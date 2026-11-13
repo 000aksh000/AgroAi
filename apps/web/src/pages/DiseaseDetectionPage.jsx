@@ -9,8 +9,7 @@ import {
   Info,
   RefreshCw,
   Leaf,
-  Sprout,
-  Check
+  Sprout
 } from "lucide-react";
 import { apiClient } from "../api/client";
 import { Card } from "../components/ui/Card";
@@ -68,34 +67,34 @@ export const DiseaseDetectionPage = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-sand-200/80">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E8DD]">
         <div>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black text-soil-900 tracking-tight">
+            <h1 className="text-2xl font-bold text-[#202820] tracking-tight">
               Plant Disease Diagnostic Scanner
             </h1>
             <Badge variant="leaf" size="sm">
-              <Leaf className="w-3 h-3 text-leaf-600 mr-0.5 inline" />
+              <Leaf className="w-3 h-3 text-[#174C35] mr-0.5 inline" />
               Gemini Vision AI
             </Badge>
           </div>
-          <p className="text-xs text-soil-500 mt-1 font-medium">
-            Upload leaf photos to diagnose fungal, bacterial, and pest blights with integrated IPM treatment advice.
+          <p className="text-xs text-[#788579] mt-1 font-medium">
+            Upload leaf photographs to diagnose fungal, bacterial, and pest blights with integrated IPM treatment advice.
           </p>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Upload Column (5 cols on lg) */}
+        {/* Upload Column */}
         <div className="lg:col-span-5 space-y-4">
           <Card>
-            <h3 className="text-xs font-bold text-soil-800 uppercase tracking-wider mb-4 flex items-center gap-1.5">
-              <Sprout className="w-3.5 h-3.5 text-leaf-600" />
+            <h3 className="text-xs font-semibold text-[#788579] uppercase tracking-wider mb-4 flex items-center gap-1.5">
+              <Sprout className="w-3.5 h-3.5 text-[#174C35]" />
               Upload Foliage Photo
             </h3>
 
             {error && (
-              <div className="mb-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs flex items-center gap-2">
+              <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                 <span>{error}</span>
               </div>
@@ -111,7 +110,7 @@ export const DiseaseDetectionPage = () => {
                   handleFileChange(e.dataTransfer.files[0]);
                 }
               }}
-              className="border-2 border-dashed border-sand-300 hover:border-leaf-500 rounded-3xl p-6 text-center cursor-pointer transition-all duration-200 bg-sand-50/70 hover:bg-sand-100/70"
+              className="border-2 border-dashed border-[#DCE1D3] hover:border-[#174C35] rounded-xl p-6 text-center cursor-pointer transition-colors duration-150 bg-[#FAFBF7] hover:bg-[#F0F6F3]"
             >
               <input
                 ref={fileInputRef}
@@ -130,21 +129,21 @@ export const DiseaseDetectionPage = () => {
                   <img
                     src={previewUrl}
                     alt="Leaf upload preview"
-                    className="max-h-56 mx-auto rounded-2xl object-contain shadow-warm border border-sand-200"
+                    className="max-h-56 mx-auto rounded-lg object-contain border border-[#E5E8DD]"
                   />
-                  <p className="text-xs text-leaf-700 font-bold flex items-center justify-center gap-1">
+                  <p className="text-xs text-[#174C35] font-semibold flex items-center justify-center gap-1">
                     <RefreshCw className="w-3.5 h-3.5" /> Click or drag to change image
                   </p>
                 </div>
               ) : (
                 <div className="py-6">
-                  <div className="w-14 h-14 rounded-2xl bg-[#fffdfa] border border-sand-300/80 flex items-center justify-center mx-auto text-soil-400 mb-3 shadow-warm">
-                    <UploadCloud className="w-7 h-7 text-leaf-600" />
+                  <div className="w-12 h-12 rounded-xl bg-white border border-[#DCE1D3] flex items-center justify-center mx-auto text-[#174C35] mb-3 shadow-2xs">
+                    <UploadCloud className="w-6 h-6" />
                   </div>
-                  <p className="text-sm font-bold text-soil-800">
+                  <p className="text-sm font-semibold text-[#202820]">
                     Click to browse or drag & drop leaf image
                   </p>
-                  <p className="text-xs text-soil-400 mt-1 font-medium">
+                  <p className="text-xs text-[#788579] mt-1 font-medium">
                     Supports JPEG, PNG, WEBP (Max 10MB)
                   </p>
                 </div>
@@ -153,13 +152,13 @@ export const DiseaseDetectionPage = () => {
 
             <div className="mt-4 space-y-3 text-xs">
               <div>
-                <label className="block font-bold text-soil-700 mb-1">
+                <label className="block font-semibold text-[#202820] mb-1">
                   Crop Type (Optional Hint)
                 </label>
                 <select
                   value={cropName}
                   onChange={(e) => setCropName(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-800 font-medium cursor-pointer"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DCE1D3] focus:outline-none focus:ring-2 focus:ring-[#174C35] bg-white text-[#202820] font-medium cursor-pointer"
                 >
                   <option value="Tomato">Tomato (Tamatar)</option>
                   <option value="Potato">Potato (Aloo)</option>
@@ -173,22 +172,22 @@ export const DiseaseDetectionPage = () => {
               </div>
 
               <div>
-                <label className="block font-bold text-soil-700 mb-1">
+                <label className="block font-semibold text-[#202820] mb-1">
                   Field Observations / Notes
                 </label>
                 <textarea
                   rows={2}
-                  placeholder="e.g. Spotted yellowing with brown margins after rainfall..."
+                  placeholder="e.g. Concentric brown rings with yellow halo on lower canopy..."
                   value={userNotes}
                   onChange={(e) => setUserNotes(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs rounded-xl border border-sand-300 focus:outline-none focus:ring-2 focus:ring-leaf-500 bg-[#fffefc] text-soil-800 placeholder:text-soil-300"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DCE1D3] focus:outline-none focus:ring-2 focus:ring-[#174C35] bg-white text-[#202820] placeholder:text-[#788579]/60"
                 />
               </div>
 
-              {/* Sample Leaf Selector for quick testing */}
+              {/* Sample Foliage Selector */}
               <div className="pt-1">
-                <span className="text-[11px] font-bold text-soil-500 block mb-1.5 uppercase tracking-wider">
-                  Or Test with Sample Foliage:
+                <span className="text-[10px] font-bold text-[#788579] block mb-1.5 uppercase tracking-wider">
+                  Test with Sample Foliage:
                 </span>
                 <div className="flex gap-2">
                   <button
@@ -221,9 +220,9 @@ export const DiseaseDetectionPage = () => {
                         }
                       });
                     }}
-                    className="flex-1 py-2 px-2.5 rounded-xl bg-sand-100 hover:bg-sand-200 text-soil-800 text-[11px] font-bold transition-colors border border-sand-300 shadow-2xs cursor-pointer"
+                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-[#FAF6F2] hover:bg-[#F3ECE4] text-[#8B6548] text-xs font-semibold transition-colors border border-[#E6D7C8] cursor-pointer"
                   >
-                    🍂 Blighted Leaf Sample
+                    Blighted Leaf Sample
                   </button>
                   <button
                     type="button"
@@ -253,9 +252,9 @@ export const DiseaseDetectionPage = () => {
                         }
                       });
                     }}
-                    className="flex-1 py-2 px-2.5 rounded-xl bg-leaf-50 hover:bg-leaf-100 text-leaf-900 text-[11px] font-bold transition-colors border border-leaf-300 shadow-2xs cursor-pointer"
+                    className="flex-1 py-1.5 px-2.5 rounded-lg bg-[#F0F6F3] hover:bg-[#E4F4E4] text-[#174C35] text-xs font-semibold transition-colors border border-[#DCE9E2] cursor-pointer"
                   >
-                    🌱 Healthy Leaf Sample
+                    Healthy Foliage Sample
                   </button>
                 </div>
               </div>
@@ -264,8 +263,8 @@ export const DiseaseDetectionPage = () => {
                 onClick={() => uploadMutation.mutate()}
                 disabled={!file}
                 isLoading={uploadMutation.isPending}
-                className="w-full mt-2 shadow-warm"
-                icon={<ScanLine className="w-4 h-4 text-leaf-200" />}
+                className="w-full mt-2"
+                icon={<ScanLine className="w-4 h-4" />}
               >
                 Scan & Diagnose Leaf
               </Button>
@@ -273,22 +272,22 @@ export const DiseaseDetectionPage = () => {
           </Card>
         </div>
 
-        {/* Diagnostic Results (7 cols on lg) */}
+        {/* Diagnostic Results */}
         <div className="lg:col-span-7">
           {diagnosisResult ? (
-            <div className="space-y-6 animate-in fade-in zoom-in-95 duration-200">
+            <div className="space-y-5 animate-in fade-in zoom-in-95 duration-200">
               {/* Primary Diagnosis Card */}
               <Card
-                className={`border-t-4 ${
+                className={`border-t-2 ${
                   diagnosisResult.prediction.isHealthy
-                    ? "border-t-leaf-600 bg-leaf-50/20"
-                    : "border-t-soil-600 bg-soil-50/20"
+                    ? "border-t-[#174C35]"
+                    : "border-t-[#8B6548]"
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-bold text-soil-400 uppercase tracking-wider">
+                      <span className="text-[10px] font-bold text-[#788579] uppercase tracking-wider">
                         Pathology Diagnosis
                       </span>
                       <Badge
@@ -305,41 +304,41 @@ export const DiseaseDetectionPage = () => {
                       </Badge>
                     </div>
 
-                    <h2 className="text-2xl font-black text-soil-900 tracking-tight">
+                    <h2 className="text-xl sm:text-2xl font-bold text-[#202820] tracking-tight">
                       {diagnosisResult.prediction.diseaseName}
                     </h2>
                     {diagnosisResult.prediction.scientificName && (
-                      <span className="text-xs text-soil-500 italic block mt-0.5 font-medium">
+                      <span className="text-xs text-[#788579] italic block mt-0.5">
                         Pathogen: {diagnosisResult.prediction.scientificName}
                       </span>
                     )}
                   </div>
 
                   <div className="text-right">
-                    <span className="text-xs text-soil-400 block font-semibold">Confidence</span>
-                    <span className="text-2xl font-black text-soil-900">
+                    <span className="text-xs text-[#788579] block font-medium">Confidence</span>
+                    <span className="text-2xl font-bold text-[#174C35]">
                       {Math.round(diagnosisResult.prediction.confidence * 100)}%
                     </span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-[#fffefc] border border-sand-200 text-xs text-soil-800 leading-relaxed my-3 font-medium">
-                  <strong className="text-soil-900 font-bold">Pathological Cause:</strong>{" "}
+                <div className="p-3.5 rounded-lg bg-[#F7F8F2] border border-[#E5E8DD] text-xs text-[#202820] leading-relaxed my-3 font-normal">
+                  <strong className="text-[#202820] font-semibold">Pathological Cause:</strong>{" "}
                   {diagnosisResult.prediction.cause}
                 </div>
 
                 {/* Symptoms List */}
                 {diagnosisResult.prediction.symptoms.length > 0 && (
                   <div className="my-4">
-                    <span className="text-xs font-bold text-soil-800 uppercase tracking-wider block mb-2 flex items-center gap-1.5">
-                      <Leaf className="w-3.5 h-3.5 text-leaf-600" />
+                    <span className="text-xs font-semibold text-[#202820] uppercase tracking-wider block mb-2 flex items-center gap-1.5">
+                      <Leaf className="w-3.5 h-3.5 text-[#174C35]" />
                       Observed Foliage Symptoms
                     </span>
-                    <ul className="space-y-1.5 text-xs text-soil-700">
+                    <ul className="space-y-1.5 text-xs text-[#202820]">
                       {diagnosisResult.prediction.symptoms.map((s, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-leaf-600 font-bold">•</span>
-                          <span className="font-medium">{s}</span>
+                          <span className="text-[#174C35] font-bold">•</span>
+                          <span>{s}</span>
                         </li>
                       ))}
                     </ul>
@@ -349,31 +348,31 @@ export const DiseaseDetectionPage = () => {
 
               {/* Treatment Protocols */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <Card className="border-l-4 border-l-leaf-600 bg-leaf-50/30">
-                  <h4 className="text-xs font-bold text-leaf-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-leaf-600" />
+                <Card className="border-l-2 border-l-[#174C35]">
+                  <h4 className="text-xs font-bold text-[#174C35] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <CheckCircle2 className="w-4 h-4 text-[#174C35]" />
                     Organic & Bio-Control Remedies
                   </h4>
-                  <ul className="space-y-2 text-xs text-soil-700">
+                  <ul className="space-y-2 text-xs text-[#202820]">
                     {diagnosisResult.prediction.organicTreatment.map((org, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="text-leaf-600 font-bold">✓</span>
-                        <span className="font-medium">{org}</span>
+                        <span className="text-[#174C35] font-bold">✓</span>
+                        <span>{org}</span>
                       </li>
                     ))}
                   </ul>
                 </Card>
 
-                <Card className="border-l-4 border-l-soil-600 bg-soil-50/30">
-                  <h4 className="text-xs font-bold text-soil-900 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <ShieldAlert className="w-4 h-4 text-soil-600" />
+                <Card className="border-l-2 border-l-[#8B6548]">
+                  <h4 className="text-xs font-bold text-[#8B6548] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <ShieldAlert className="w-4 h-4 text-[#8B6548]" />
                     Chemical Fungicide / Bactericide
                   </h4>
-                  <ul className="space-y-2 text-xs text-soil-700">
+                  <ul className="space-y-2 text-xs text-[#202820]">
                     {diagnosisResult.prediction.chemicalTreatment.map((chem, i) => (
                       <li key={i} className="flex items-start gap-2">
-                        <span className="text-amber-600 font-bold">⚠️</span>
-                        <span className="font-medium">{chem}</span>
+                        <span className="text-[#8B6548] font-bold">⚠️</span>
+                        <span>{chem}</span>
                       </li>
                     ))}
                   </ul>
@@ -382,37 +381,37 @@ export const DiseaseDetectionPage = () => {
 
               {/* Preventative Field Advice */}
               <Card>
-                <h4 className="text-xs font-bold text-soil-800 uppercase tracking-wider mb-2">
+                <h4 className="text-xs font-semibold text-[#202820] uppercase tracking-wider mb-2">
                   Preventative Field Hygiene & Cultural Practices
                 </h4>
-                <div className="space-y-1.5 text-xs text-soil-700">
+                <div className="space-y-1.5 text-xs text-[#202820]">
                   {diagnosisResult.prediction.preventionTips.map((tip, i) => (
                     <div key={i} className="flex items-start gap-2">
-                      <span className="text-leaf-600 font-bold">→</span>
-                      <span className="font-medium">{tip}</span>
+                      <span className="text-[#174C35] font-bold">→</span>
+                      <span>{tip}</span>
                     </div>
                   ))}
                 </div>
               </Card>
 
               {/* Safety Advisory Disclaimer */}
-              <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-[11px] text-amber-950 flex items-start gap-2.5 shadow-2xs">
-                <Info className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-                <p className="leading-relaxed font-medium">
-                  <strong>Important Agronomic Notice:</strong> Computer vision image predictions provide diagnostic guidance based on visible leaf patterns. Before applying restricted agrochemicals, verify symptoms with your nearest local Krishi Vigyan Kendra (KVK) or government agricultural officer. Always observe safety withholding periods before harvest.
+              <div className="p-3.5 rounded-lg bg-[#FAF6F2] border border-[#E6D7C8] text-xs text-[#735239] flex items-start gap-2.5">
+                <Info className="w-4 h-4 text-[#8B6548] flex-shrink-0 mt-0.5" />
+                <p className="leading-relaxed">
+                  <strong>Important Agronomic Notice:</strong> Computer vision image predictions provide diagnostic guidance based on visible leaf patterns. Before applying chemical controls, verify symptoms with your local agricultural officer and observe pre-harvest intervals.
                 </p>
               </div>
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center p-12 text-center bg-[#fffefc] rounded-3xl border border-dashed border-sand-300 min-h-[420px] shadow-warm">
-              <div className="w-16 h-16 rounded-2xl bg-sand-100 text-leaf-700 border border-sand-300 flex items-center justify-center mb-4 shadow-sm">
-                <Leaf className="w-8 h-8 text-leaf-600" />
+            <div className="h-full flex flex-col items-center justify-center p-12 text-center bg-white rounded-xl border border-dashed border-[#DCE1D3] min-h-[420px]">
+              <div className="w-12 h-12 rounded-xl bg-[#F0F6F3] text-[#174C35] border border-[#DCE9E2] flex items-center justify-center mb-4">
+                <Leaf className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-black text-soil-900">
+              <h3 className="text-base font-bold text-[#202820]">
                 Awaiting Leaf Photograph
               </h3>
-              <p className="mt-1.5 text-xs text-soil-500 max-w-sm leading-relaxed font-medium">
-                Take or upload a close-up picture of the affected plant leaf showing discoloration, spots, or wilt. Gemini Vision AI will classify the pathogen and recommend organic and chemical treatments.
+              <p className="mt-1.5 text-xs text-[#788579] max-w-sm leading-relaxed">
+                Upload a close-up photograph of the affected plant foliage. Gemini Multimodal Vision AI will evaluate pathology patterns and provide chemical and bio-control protocols.
               </p>
             </div>
           )}
